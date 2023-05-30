@@ -1,4 +1,14 @@
+DO $$BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'user_role_enum') THEN
 CREATE TYPE user_role_enum AS ENUM ('ADMIN', 'USER', 'MANAGER');
+END IF;
+END$$;
+    DO $$BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_type WHERE typname = 'manager_status_enum') THEN
+CREATE TYPE manager_status_enum AS ENUM ('ACTIVE', 'PASSIVE');
+END IF;
+END$$;
+
 
 CREATE TABLE IF NOT EXISTS Users (
                                      User_ID SERIAL PRIMARY KEY,
@@ -8,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Users (
                                      Password VARCHAR(255) NOT NULL,
                                      Role user_role_enum NOT NULL,
                                      Photo BYTEA,
-                                     Registration_Date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                                     Registration_Data TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE IF NOT EXISTS Managers
@@ -21,8 +31,7 @@ CREATE TABLE IF NOT EXISTS Managers
     INTEGER
     NOT
     NULL,
-    Status
-    VARCHAR
+    Status manager_status_enum NOT NULL,
 (
     255
 ) NOT NULL,
@@ -112,10 +121,6 @@ CREATE TABLE IF NOT EXISTS Reviews
     INTEGER
     NOT
     NULL,
-    Trip_ID
-    INTEGER,
-    Excursion_ID
-    INTEGER,
     Photo
     BYTEA,
     FOREIGN
@@ -129,23 +134,6 @@ CREATE TABLE IF NOT EXISTS Reviews
   ON UPDATE CASCADE,
     FOREIGN KEY
 (
-    Trip_ID
-) REFERENCES Trips
-(
-    Trip_ID
-)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE,
-    FOREIGN KEY
-(
-    Excursion_ID
-) REFERENCES Excursions
-(
-    Excursion_ID
-)
-  ON DELETE CASCADE
-  ON UPDATE CASCADE
-    );
 
 CREATE TABLE IF NOT EXISTS TripParticipants
 (

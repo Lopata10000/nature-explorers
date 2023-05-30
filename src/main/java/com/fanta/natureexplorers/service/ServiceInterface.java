@@ -1,4 +1,4 @@
-package com.fanta.moneywithsoul.service;
+package com.fanta.natureexplorers.service;
 
 import java.util.List;
 import java.util.Set;
@@ -20,7 +20,7 @@ public interface ServiceInterface<T> {
      * @param id the id
      * @return the by id
      */
-    T getById(Long id);
+    T getById(Integer id);
 
     /**
      * Gets all.
@@ -39,17 +39,17 @@ public interface ServiceInterface<T> {
     /**
      * Update.
      *
-     * @param id     the id
+     * @param id the id
      * @param entity the entity
      */
-    void update(Long id, T entity);
+    void update(Integer id, T entity);
 
     /**
      * Delete.
      *
      * @param id the id
      */
-    void delete(Long id);
+    void delete(Integer id);
 
     /**
      * Validate and save.
@@ -77,10 +77,10 @@ public interface ServiceInterface<T> {
     /**
      * Validate and update.
      *
-     * @param id     the id
+     * @param id the id
      * @param object the object
      */
-    default void validateAndUpdate(Long id, T object) {
+    default void validateAndUpdate(Integer id, T object) {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
         Validator validator = validatorFactory.getValidator();
         Set<ConstraintViolation<T>> violations = validator.validate(object);
@@ -93,7 +93,6 @@ public interface ServiceInterface<T> {
                         .append(violation.getMessage())
                         .append("\n");
             }
-            showErrorMessage(errorMessage.toString());
             throw new RuntimeException();
         }
     }

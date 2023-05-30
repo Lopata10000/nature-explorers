@@ -3,9 +3,9 @@
 <hibernate-configuration>
     <session-factory>
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
-        <property name="hibernate.connection.url">jdbc:postgresql://containers-us-west-91.railway.app:7090/railway</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/NatureExplorers</property>
         <property name="hibernate.connection.username">postgres</property>
-        <property name="hibernate.connection.password">PkFOJmLy036WZ8hpzqbM</property>
+        <property name="hibernate.connection.password">45435</property>
 
         <!-- Налаштування Hibernate -->
         <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
@@ -14,14 +14,12 @@
         <property name="connection.pool_size">1</property>
         <property name="current_session_context_class">thread</property>
         <property name="hibernate.hbm2ddl.auto">update</property>
-        <mapping class="com.fanta.moneywithsoul.entity.User"/>
-        <mapping class="com.fanta.moneywithsoul.entity.Budget"/>
-        <mapping class="com.fanta.moneywithsoul.entity.Cost"/>
-        <mapping class="com.fanta.moneywithsoul.entity.Earning"/>
-        <mapping class="com.fanta.moneywithsoul.entity.Transaction"/>
-        <mapping class="com.fanta.moneywithsoul.entity.CostCategory"/>
-        <mapping class="com.fanta.moneywithsoul.entity.EarningCategory"/>
-        <mapping class="com.fanta.moneywithsoul.entity.PlanningCost"/>
-        <mapping class="com.fanta.moneywithsoul.entity.ExchangeRate"/>
+        <mapping class="com.fanta.natureexplorers.entity.User"/>
+        <mapping class="com.fanta.natureexplorers.entity.Excursion"/>
+        <mapping class="com.fanta.natureexplorers.entity.Trip"/>
+        <mapping class="com.fanta.natureexplorers.entity.Manager"/>
+        <mapping class="com.fanta.natureexplorers.entity.ExcursionParticipant"/>
+        <mapping class="com.fanta.natureexplorers.entity.TripParticipant"/>
+        <mapping class="com.fanta.natureexplorers.entity.Review"/>
     </session-factory>
 </hibernate-configuration>

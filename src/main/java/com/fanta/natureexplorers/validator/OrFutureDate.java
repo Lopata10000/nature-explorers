@@ -1,4 +1,4 @@
-package com.fanta.moneywithsoul.validator;
+package com.fanta.natureexplorers.validator;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -8,9 +8,7 @@ import java.lang.annotation.Target;
 import javax.validation.Constraint;
 import javax.validation.Payload;
 
-/**
- * The interface Or future date.
- */
+/** The interface Or future date. */
 @Documented
 @Constraint(validatedBy = OrFutureValidator.class)
 @Target({ElementType.ANNOTATION_TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})

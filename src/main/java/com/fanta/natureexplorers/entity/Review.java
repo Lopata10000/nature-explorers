@@ -25,7 +25,7 @@ public class Review {
     @NotNull(message = "Rating cannot be null")
     @Min(value = 1, message = "Rating must be at least 1")
     @Max(value = 5, message = "Rating must be at most 5")
-    private Long rating;
+    private Integer rating;
     @NotNull(message = "Text cannot be null")
     @Size(max = 255, min = 10, message = "Text must not exceed 255 characters, and min 10")
     @Column(name = "review_text")
@@ -39,7 +39,7 @@ public class Review {
     private User user;
 
 
-    public Review(Long rating, String reviewText, User user, Trip trip, Excursion excursion) {
+    public Review(Integer rating, String reviewText, User user) {
         this.rating = rating;
         this.reviewText = reviewText;
         this.user = user;
@@ -57,11 +57,11 @@ public class Review {
         this.reviewId = reviewId;
     }
 
-    public Long getRating() {
+    public Integer getRating() {
         return rating;
     }
 
-    public void setRating(Long rating) {
+    public void setRating(Integer rating) {
         this.rating = rating;
     }
 

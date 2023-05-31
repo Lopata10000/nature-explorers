@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tablecontroller.ExcursionParticipantController">
+    <children>
+        <Pane layoutX="100.0" layoutY="311.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="231.0" prefWidth="600.0" AnchorPane.bottomAnchor="58.80000000000001" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0" AnchorPane.topAnchor="310.0">
+            <children>
+                <TextField fx:id="userId" prefWidth="275.0" promptText="user Id" styleClass="jfx-text-field-material">
+                    <font>
+                        <Font name="MS Outlook" size="16.0" />
+                    </font></TextField>
+                <TextField fx:id="excursionId" layoutX="325.0" prefWidth="275.0" promptText="Excursion id" styleClass="jfx-text-field-material">
+                    <font>
+                        <Font name="MS Outlook" size="16.0" />
+                    </font></TextField>
+                <Button fx:id="createButton" layoutY="167.0" mnemonicParsing="false" onAction="#createExcursionParticipant" prefWidth="150.0" styleClass="jfx-button-main" text="Create">
+                    <font>
+                        <Font name="MS Outlook" size="16.0" />
+                    </font></Button>
+                <Button fx:id="updateButton" layoutX="225.0" layoutY="162.0" mnemonicParsing="false" onAction="#updateExcursionParticipant" prefHeight="40.0" prefWidth="150.0" styleClass="jfx-button-main" text="Update">
+                    <font>
+                        <Font size="16.0" />
+                    </font></Button>
+                <Button fx:id="deleteButton" layoutX="450.0" layoutY="167.0" mnemonicParsing="false" onAction="#deleteExcursionParticipant" prefWidth="150.0" styleClass="jfx-button-main" text="Delete">
+                    <font>
+                        <Font name="MS Outlook" size="16.0" />
+                    </font></Button>
+
+            </children>
+        </Pane>
+        <TableView fx:id="excursionParticipantTable" layoutY="29.0" onMouseClicked="#handleTableClick" prefHeight="258.0" prefWidth="800.0" style="-fx-background-color: #666666;" styleClass="root" stylesheets="@/com/fanta/nature-explorers/css/table.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
+        <AnchorPane layoutX="249.0" layoutY="268.0" />
+        <TextField fx:id="findByIdField" layoutX="37.0" layoutY="-1.0" onKeyTyped="#searchExcursionParticipant" prefHeight="30.0" prefWidth="770.0" promptText="Find by id" styleClass="jfx-text-field-material" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0">
+            <font>
+                <Font name="MS Outlook" size="16.0" />
+            </font>
+        </TextField>
+        <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@/com/fanta/nature-explorers/images/Search.png" />
+            </image>
+        </ImageView>
+    </children>
+</AnchorPane>

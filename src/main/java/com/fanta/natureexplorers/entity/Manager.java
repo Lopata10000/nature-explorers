@@ -1,6 +1,11 @@
 package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.enumrole.ManagerStatus;
+import com.fanta.natureexplorers.enumrole.UserRole;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,10 +16,14 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "managers")
+@TypeDefs({
+        @TypeDef(name = "pgsql_enum", typeClass = org.hibernate.type.EnumType.class)
+})
 public class Manager {
 
     @Id
@@ -24,16 +33,21 @@ public class Manager {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
+    @Type(type = "pgsql_enum")
     private ManagerStatus status = ManagerStatus.ACTIVE;
 
     private byte[] photo;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", referencedColumnName = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "user_id", unique = true)
     private User user;
 
     public Manager(User user) {
         this.user = user;
+    }
+    public Manager(User user, ManagerStatus status) {
+        this.user = user;
+        this.status = status;
     }
     public Manager() {
 
@@ -74,5 +88,19 @@ public class Manager {
 
     public void setStatus(ManagerStatus status) {
         this.status = status;
+    }
+    @PrePersist
+    private void setDefaultRole() {
+        if (status == null || !isValidUserRole(status.name())) {
+            status = ManagerStatus.ACTIVE;
+        }
+    }
+    private boolean isValidUserRole(String value) {
+        try {
+            UserRole.valueOf(value);
+            return true;
+        } catch (IllegalArgumentException e) {
+            return false;
+        }
     }
 }

@@ -10,7 +10,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
-<Pane id="leftController" fx:controller="com.fanta.natureexplorers.controller.LeftController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="242.0" style="-fx-background-color: #3333;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="leftController" fx:controller="com.fanta.natureexplorers.controller.LeftController" styleClass="rounded-pane-left" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="200.0" style="-fx-background-color: #4d4d4d;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@/com/fanta/nature-explorers/css/styles.css" />
    </stylesheets>
@@ -82,41 +82,31 @@
                      <Font name="MS Outlook" size="16.0" />
                   </font>
                </JFXButton>
-               <JFXButton styleClass="jfx-button-fab" fx:id="transactionsTableButton" onAction="#managerTable" prefWidth="150.0" text="Managers">
+               <JFXButton styleClass="jfx-button-fab" fx:id="mangerTableButton" onAction="#managerTable" prefWidth="150.0" text="Managers">
                   <font>
                      <Font name="MS Outlook" size="16.0" />
                   </font>
                </JFXButton>
-<!--               <JFXButton styleClass="jfx-button-fab" fx:id="exchangeRateTableButton"  onAction="#exchangeRateTable" prefWidth="150.0" text="Exchange Rate">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
-<!--               <JFXButton styleClass="jfx-button-fab" fx:id="costsTableButton" onAction="#costsTable"  prefWidth="150.0" text="Costs">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
-<!--               <JFXButton styleClass="jfx-button-fab" fx:id="earningTableButton"  onAction="#earningTable" prefWidth="150.0" text="Earning">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
-<!--               <JFXButton styleClass="jfx-button-fab"  fx:id="planingCostsTableButton"  onAction="#planingCostsTable" prefWidth="150.0" text="Planing Costs">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
-<!--               <JFXButton styleClass="jfx-button-fab" fx:id="costCategoryTableButton" onAction="#costCategoryTable"  prefWidth="150.0" text="Cost Category">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
-<!--               <JFXButton styleClass="jfx-button-fab" fx:id="earningCategoryTableButton" onAction="#earningCategoryTable" prefWidth="150.0" text="Earning Category">-->
-<!--                  <font>-->
-<!--                     <Font name="MS Outlook" size="16.0" />-->
-<!--                  </font>-->
-<!--               </JFXButton>-->
+               <JFXButton styleClass="jfx-button-fab" fx:id="excursionTableButton"  onAction="#excursionTable" prefWidth="150.0" text="Excursion">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab" fx:id="excursionParticipantsTableButton" onAction="#excursionParticipantsTable"  prefWidth="150.0" text="Excursion Participants">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab" fx:id="tripTableButton"  onAction="#tripTable" prefWidth="150.0" text="Trip">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab"  fx:id="tripParticipantsTableButton"  onAction="#tripParticipantsCostsTable" prefWidth="150.0" text="Trip Participants">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
                <JFXButton styleClass="jfx-button-fab" fx:id="backButton" onAction="#backToMainWindow" prefWidth="150.0" text="Back to Menu">
                   <font>
                      <Font name="MS Outlook" size="16.0" />

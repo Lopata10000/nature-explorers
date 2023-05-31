@@ -1,7 +1,11 @@
 package com.fanta.natureexplorers.controller;
 
+import com.fanta.natureexplorers.controller.tablecontroller.ExcursionController;
+import com.fanta.natureexplorers.controller.tablecontroller.ExcursionParticipantController;
 import com.fanta.natureexplorers.controller.tablecontroller.ReviewController;
 import com.fanta.natureexplorers.controller.tablecontroller.ManagerController;
+import com.fanta.natureexplorers.controller.tablecontroller.TripController;
+import com.fanta.natureexplorers.controller.tablecontroller.TripParticipantController;
 import com.fanta.natureexplorers.controller.tablecontroller.UserController;
 import com.jfoenix.controls.JFXButton;
 
@@ -9,6 +13,7 @@ import java.io.IOException;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -18,8 +23,8 @@ import javafx.scene.layout.Pane;
  */
 public class MainController {
     @FXML private BorderPane mainApp;
-    @FXML private JFXButton registrationButton;
-    @FXML private JFXButton authorizationButton;
+    @FXML private Button registrationButton;
+    @FXML private Button authorizationButton;
 
     /**
      * Instantiates a new Main controller.
@@ -43,7 +48,7 @@ public class MainController {
             FXMLLoader loader =
                     new FXMLLoader(
                             getClass()
-                                    .getResource("/com/fanta/nature-explorers/Authorization.fxml"));
+                                    .getResource("/fxml/Authorization.fxml"));
             AnchorPane authorizationPane = loader.load();
 
             AuthorizationController authorizationController = loader.getController();
@@ -62,7 +67,7 @@ public class MainController {
         try {
             FXMLLoader loader =
                     new FXMLLoader(
-                            getClass().getResource("/com/fanta/nature-explorers/Registration.fxml"));
+                            getClass().getResource("/fxml/Registration.fxml"));
             AnchorPane registrationPane = loader.load();
 
             RegistrationController registrationController = loader.getController();
@@ -83,7 +88,7 @@ public class MainController {
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/com/fanta/nature-explorers/database/LeftList.fxml"));
+                                            "/fxml/LeftList.fxml"));
             Pane dataBasePane = loader.load();
 
             LeftController leftController = loader.getController();
@@ -104,7 +109,7 @@ public class MainController {
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/com/fanta/nature-explorers/database/UserTable.fxml"));
+                                            "/fxml/database/UserTable.fxml"));
             AnchorPane userController = loader.load();
 
             UserController userController1 = loader.getController();
@@ -125,7 +130,7 @@ public class MainController {
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/com/fanta/nature-explorers/database/ManagerTable.fxml"));
+                                            "/fxml/database/ManagerTable.fxml"));
             AnchorPane mangerController = loader.load();
 
             ManagerController mangerController1 = loader.getController();
@@ -146,7 +151,7 @@ public class MainController {
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/com/fanta/nature-explorers/database/ReviewTable.fxml"));
+                                            "/fxml/database/ReviewTable.fxml"));
             AnchorPane reviewController = loader.load();
 
             ReviewController reviewController1 = loader.getController();
@@ -157,132 +162,91 @@ public class MainController {
             e.printStackTrace();
         }
     }
-//
-//    /**
-//     * Exchange rate window.
-//     */
-//    public void exchangeRateWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/ExchangeRateTable.fxml"));
-//            AnchorPane exchangeRateController = loader.load();
-//
-//            ExchangeRateController exchangeRateController1 = loader.getController();
-//            exchangeRateController1.setMainController(this);
-//
-//            mainApp.setCenter(exchangeRateController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    /**
-//     * Cost window.
-//     */
-//    public void costWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/CostTable.fxml"));
-//            AnchorPane costController = loader.load();
-//
-//            CostController controller = loader.getController();
-//            controller.setMainController(this);
-//
-//            mainApp.setCenter(costController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    /**
-//     * Earning window.
-//     */
-//    public void earningWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/EarningTable.fxml"));
-//            AnchorPane earningController = loader.load();
-//
-//            EarningController controller = loader.getController();
-//            controller.setMainController(this);
-//
-//            mainApp.setCenter(earningController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    /**
-//     * Planning cost window.
-//     */
-//    public void planningCostWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/ReviewTable.fxml"));
-//            AnchorPane planningCostController = loader.load();
-//
-//            ReviewController controller = loader.getController();
-//            controller.setMainController(this);
-//
-//            mainApp.setCenter(planningCostController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    /**
-//     * Cost category window.
-//     */
-//    public void costCategoryWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/CostCategoryTable.fxml"));
-//            AnchorPane costCategoryController = loader.load();
-//
-//            CostCategoryController controller = loader.getController();
-//            controller.setMainController(this);
-//
-//            mainApp.setCenter(costCategoryController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-//
-//    /**
-//     * Earning category window.
-//     */
-//    public void earningCategoryWindow() {
-//        try {
-//            FXMLLoader loader =
-//                    new FXMLLoader(
-//                            getClass()
-//                                    .getResource(
-//                                            "/com/fanta/nature-explorers/DataBase/EarningCategoryTable.fxml"));
-//            AnchorPane earningCategoryController = loader.load();
-//
-//            EarningCategoryController controller = loader.getController();
-//            controller.setMainController(this);
-//
-//            mainApp.setCenter(earningCategoryController);
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
+
+    /**
+     * Exchange rate window.
+     */
+    public void tripWindow() {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/TripTable.fxml"));
+            AnchorPane tripController = loader.load();
+
+            TripController tripController1 = loader.getController();
+            tripController1.setMainController(this);
+
+            mainApp.setCenter(tripController);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Cost window.
+     */
+    public void tripParticipantsWindow() {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/TripParticipantTable.fxml"));
+            AnchorPane tripParticipantController1 = loader.load();
+
+            TripParticipantController tripParticipantController = loader.getController();
+            tripParticipantController.setMainController(this);
+
+            mainApp.setCenter(tripParticipantController1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Earning window.
+     */
+    public void excursionWindow() {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/ExcursionTable.fxml"));
+            AnchorPane excursionController1 = loader.load();
+
+            ExcursionController excursionController = loader.getController();
+            excursionController.setMainController(this);
+
+            mainApp.setCenter(excursionController1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Planning cost window.
+     */
+    public void excursionParticipantsWindow() {
+        try {
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/ExcursionParticipantTable.fxml"));
+            AnchorPane excursionParticipantController1 = loader.load();
+
+            ExcursionParticipantController excursionParticipantController = loader.getController();
+            excursionParticipantController.setMainController(this);
+
+            mainApp.setCenter(excursionParticipantController1);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     /**
      * Reset left pane.
@@ -290,7 +254,7 @@ public class MainController {
     public void resetLeftPane() {
         try {
             FXMLLoader leftLoader =
-                    new FXMLLoader(getClass().getResource("/com/fanta/nature-explorers/Main.fxml"));
+                    new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             Pane leftPane = leftLoader.load();
 
             mainApp.setLeft(leftPane);
@@ -305,7 +269,7 @@ public class MainController {
     public void mainWindow() {
         try {
             FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/com/fanta/nature-explorers/Main.fxml"));
+                    new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
             BorderPane mainBorderPane = loader.load();
 
             // assuming mainApp is currently displayed

@@ -2,10 +2,13 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
+import com.fanta.natureexplorers.controller.ErrorMessage;
 import com.fanta.natureexplorers.controller.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.Manager;
 import com.fanta.natureexplorers.entity.User;
+import com.fanta.natureexplorers.enumrole.ManagerStatus;
+import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.ManagerService;;
 
 import java.net.URL;
@@ -28,10 +31,10 @@ import javafx.scene.input.MouseEvent;
 /**
  * The type Manager controller.
  */
-public class ManagerController implements Initializable {
+public class ManagerController extends ErrorMessage implements Initializable
+{
     @FXML private TableView<Manager> managerTable;
     @FXML private TextField managerStatus;
-    @FXML private TextField managerId;
     @FXML private TextField userId;
     @FXML private TextField findByIdField;
 
@@ -44,17 +47,22 @@ public class ManagerController implements Initializable {
     @FXML
     public void createManager() {
         try {
+
             Integer userID = Integer.valueOf(userId.getText());
             UserDao userDAO = new UserDao();
             User user = userDAO.getById(userID);
             if (user == null) {
                 showAlert("Користувача з таким id не існує");
             }
-            Manager manager = new Manager(user);
-            managerService.save(manager);
-            refreshTable();
-        } catch (Exception e) {
-            showAlert("Неправильний формат");
+            else {
+                Manager manager = new Manager(user, ManagerStatus.valueOf(managerStatus.getText()));
+                managerService.save(manager);
+                refreshTable();
+            }
+        }
+              catch (IllegalArgumentException exception)
+        {
+            showAlert("Не валідний статус (ACTIVE; PASSIVE)");
         }
     }
 
@@ -72,13 +80,15 @@ public class ManagerController implements Initializable {
             if (user == null) {
                 showAlert("Користувача з таким id не існує");
             } else {
-              Manager manager = new Manager(user);
-              managerService.update(Integer.valueOf(userId.getText()), manager);
+                Manager manager = new Manager(user);
+                managerService.update(Integer.valueOf(userId.getText()), manager);
                 refreshTable();
             }
-        } catch (NumberFormatException e) {
-            showAlert("Неправильний формат");
         }
+         catch (IllegalArgumentException exception)
+            {
+                showAlert("Не валідний статус (ACTIVE; PASSIVE)");
+            }
     }
 
     /**
@@ -102,19 +112,15 @@ public class ManagerController implements Initializable {
      */
     @FXML
     void searchManager() {
-        try {
             managerTable.getItems().clear();
             String managerIdText = findByIdField.getText();
             Integer managerId = Integer.parseInt(managerIdText);
             Manager managers = managerService.getById(managerId);
-            managerTable.getItems().add(managers);
-            if (managers == null) {
-                showAlert("Такого керівника не знайдено");
-                refreshTable();
-            }
-        } catch (NumberFormatException e) {
-            showAlert("Неправильний формат числа для Id");
+        if (managers == null) {
+            showAlert("Такого керівника не знайдено");
             refreshTable();
+        }else {
+            managerTable.getItems().add(managers);
         }
     }
 
@@ -149,7 +155,6 @@ public class ManagerController implements Initializable {
                     managerTable.getSelectionModel().getSelectedItem();
 
             if (selectedManager != null) {
-                managerId.setText(String.valueOf(selectedManager.getManagerId()));
                 userId.setText(String.valueOf(selectedManager.getUser().getUserId()));
                 managerStatus.setText(
                         String.valueOf(selectedManager.getStatus()));
@@ -211,4 +216,5 @@ public class ManagerController implements Initializable {
      * @param mainController the main controller
      */
     public void setMainController(MainController mainController) {}
+    Alert alert = new Alert(Alert.AlertType.ERROR);
 }

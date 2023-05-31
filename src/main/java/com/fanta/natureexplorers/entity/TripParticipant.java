@@ -11,12 +11,12 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name = "tripParticipants")
+@Table(name = "trip_participants")
 public class TripParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private int tripParticipants_id;
     @NotNull(message = "User cannot be null")
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
@@ -34,12 +34,12 @@ public class TripParticipant {
 
     }
 
-    public int getId() {
-        return id;
+    public int getTripParticipantsId() {
+        return tripParticipants_id;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setTripParticipantsId(int tripParticipants_id) {
+        this.tripParticipants_id = tripParticipants_id;
     }
 
     public User getUser() {

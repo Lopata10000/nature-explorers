@@ -10,29 +10,23 @@ import com.fanta.natureexplorers.entity.Trip;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.service.ReviewService;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-/**
- * The type Planning cost controller.
- */
 public class ReviewController implements Initializable {
     @FXML private TableView<Review> reviewTable;
     @FXML private TextField userId;
@@ -54,10 +48,10 @@ public class ReviewController implements Initializable {
             if (user == null) {
                 showAlert("Користувача з таким id не існує");
             }
-            Long userID = Long.valueOf(userId.getText());
-            Long ratingLong = Long.valueOf(rating.getText());
+            Integer userID = Integer.valueOf(userId.getText());
+            Integer ratingLong = Integer.valueOf(rating.getText());
             String textreview = reviewText.getText();
-            Review review = new Review(ratingLong, textreview, user, new Trip(), new Excursion());
+            Review review = new Review(ratingLong, textreview, user);
             reviewService.save(review);
             refreshTable();
         } catch (Exception e) {
@@ -73,10 +67,15 @@ public class ReviewController implements Initializable {
         try {
             Review selectedReview =
                     reviewTable.getSelectionModel().getSelectedItem();
-            Long userID = Long.valueOf(userId.getText());
-            Long ratingLong = Long.valueOf(rating.getText());
+            Integer reviewId =
+                    Integer.parseInt(String.valueOf(selectedReview.getReviewId()));
+            Integer userID = Integer.valueOf(userId.getText());
+            Integer ratingLong = Integer.valueOf(rating.getText());
             String textreview = reviewText.getText();
-            Review review = new Review(ratingLong, textreview, new User(), new Trip(), new Excursion());
+            UserDao userDao = new UserDao();
+            Review review = new Review(ratingLong, textreview, userDao.getById(userID));
+            reviewService.update(reviewId, review);
+            refreshTable();
         } catch (Exception e) {
             showAlert("Неправильний формат");
         }

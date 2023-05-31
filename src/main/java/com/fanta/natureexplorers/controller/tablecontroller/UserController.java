@@ -2,10 +2,14 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
+import com.fanta.natureexplorers.controller.ErrorMessage;
 import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
+
+import org.hibernate.exception.ConstraintViolationException;
 
 import java.net.URL;
 import java.sql.Connection;
@@ -27,7 +31,7 @@ import javafx.scene.input.MouseEvent;
 /**
  * The type User controller.
  */
-public class UserController implements Initializable {
+public class UserController extends ErrorMessage implements Initializable {
     @FXML private TableView<User> userTable;
     @FXML private TextField firstNameField;
     @FXML private TextField lastNameField;
@@ -44,20 +48,32 @@ public class UserController implements Initializable {
     @FXML
     public void createUser() {
         try {
-            User user = new User(
-                    firstNameField.getText(),
-                    lastNameField.getText(),
-                    emailField.getText(),
-                    passwordField.getText(),
-                    UserRole.valueOf(userStatusField.getText())
-            );
+            try {
+                User user = new User(
+                        firstNameField.getText(),
+                        lastNameField.getText(),
+                        emailField.getText(),
+                        passwordField.getText(),
+                        UserRole.valueOf(userStatusField.getText())
+                );
+                UserDao userDao = new UserDao();
+                userDao.findByEmail(emailField.getText());
+                if (userDao.findByEmail(emailField.getText()) == true) {
+                    showAlert("Користувач з такою електронною адресою існує");
+                } else
+                    userService.save(user);
+                refreshTable();
 
-            userService.save(user);
-            refreshTable();
-        } catch (IllegalArgumentException e) {
-            showAlert("Невалідний статус");
+            } catch (IllegalArgumentException exception) {
+                showAlert("Не валідний статус(USER; ADMIN; MANAGER)");
+            }
+        }
+        catch (RuntimeException exception)
+        {
+            showAlert("Корстувач з такою електронною адресою існує");
         }
     }
+
 
 
     /**
@@ -65,21 +81,23 @@ public class UserController implements Initializable {
      */
     @FXML
     public void updateUser() {
-
-        try {
-            User selectedUser = userTable.getSelectionModel().getSelectedItem();
-            Integer userId = Integer.parseInt(String.valueOf(selectedUser.getUserId()));
-            User user = new User( firstNameField.getText(),
-                    lastNameField.getText(),
-                    emailField.getText(),
-                    passwordField.getText(),
-                    UserRole.valueOf(userStatusField.getText()))
-            ;
-            userService.update(userId, user);
-            refreshTable();
-        } catch (NumberFormatException e) {
-            showAlert("Неправильний формат числа для Id");
-        }
+            try {
+                User selectedUser = userTable.getSelectionModel().getSelectedItem();
+                Integer userId = Integer.parseInt(String.valueOf(selectedUser.getUserId()));
+                User user = new User(firstNameField.getText(),
+                        lastNameField.getText(),
+                        emailField.getText(),
+                        passwordField.getText(),
+                        UserRole.valueOf(userStatusField.getText()));
+                UserDao userDao = new UserDao();
+                if (userDao.findByEmail(emailField.getText()) != true) {
+                    userService.update(userId, user);
+                    refreshTable();
+                } else
+                    showAlert("Корстувач з такою електронною адресою існує");
+            } catch (RuntimeException exception) {
+                showAlert("Корстувач з такою електронною адресою існує");
+            }
     }
 
     /**
@@ -102,22 +120,16 @@ public class UserController implements Initializable {
      */
     @FXML
     void searchUser() {
-        try {
             userTable.getItems().clear();
             // Додати користувачів до таблиці
             String userIdText = findByIdField.getText();
             Integer userId = Integer.parseInt(userIdText);
             User users = userService.getById(userId);
-            userTable.getItems().add(users);
-            if (users == null) {
-                showAlert("Такого користувача не знайдено");
-                refreshTable();
-            }
-        } catch (NumberFormatException e) {
-            // Введено неправильний формат числа
-            showAlert("Неправильний формат числа для Id");
+        if (users == null) {
+            showAlert("Такого користувача не знайдено");
             refreshTable();
         }
+            userTable.getItems().add(users);
     }
 
     private void showAlert(String message) {
@@ -125,7 +137,6 @@ public class UserController implements Initializable {
         alert.setTitle("Помилка");
         alert.setHeaderText(null);
         alert.setContentText(message);
-        alert.showAndWait();
     }
 
     @Override

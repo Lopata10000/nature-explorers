@@ -8,7 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
-public class ExcursionDao {
+public class ExcursionDao{
     private Session session;
 
     public ExcursionDao() {

@@ -2,6 +2,10 @@ package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.enumrole.UserRole;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
+
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,7 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -38,7 +41,7 @@ public class User {
 
     @NotNull(message = "Email cannot be null")
     @Email(message = "Email should be valid")
-    @Column(name = "email", unique = true)
+    @Column(name = "email")
     @Size(max = 255, message = "Email must not exceed 255 characters")
     private String email;
 
@@ -46,13 +49,12 @@ public class User {
     @Size(max = 255, min = 8, message = "Password must not exceed 255 characters, and min 10")
     private String password;
 
-
-    @Column(name = "role")
     @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private UserRole role;
     private byte[] photo;
 
-    @Column( name = "registration_data",
+    @Column( name = "registration_date",
             insertable = false,
             updatable = false,
             columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
@@ -132,18 +134,5 @@ public class User {
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
-    @PrePersist
-    private void setDefaultRole() {
-        if (role == null || !isValidUserRole(role.name())) {
-            role = UserRole.USER;
-        }
-    }
-    private boolean isValidUserRole(String value) {
-        try {
-            UserRole.valueOf(value);
-            return true;
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-    }
+
 }

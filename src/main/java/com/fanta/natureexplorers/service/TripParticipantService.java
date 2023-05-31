@@ -32,7 +32,7 @@ public class TripParticipantService implements ServiceInterface<TripParticipant>
         validateAndUpdate(id, entity);
         TripParticipant existingTripParticipant = tripParticipantDao.getById(id);
         if (existingTripParticipant != null) {
-            entity.setId(existingTripParticipant.getId());
+            entity.setTripParticipantsId(existingTripParticipant.getTripParticipantsId());
             tripParticipantDao.update(entity);
         }
     }

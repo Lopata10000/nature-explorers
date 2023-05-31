@@ -46,7 +46,7 @@ public class UserDao {
             ResultSet resultSet = statement.executeQuery();
             if (resultSet.next()) {
                 int count = resultSet.getInt(1);
-                return count > 0;
+                return count > 1;
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -57,7 +57,7 @@ public class UserDao {
     public void save(User user) {
         try (Session session = sessionFactory.openSession()) {
             Transaction transaction = session.beginTransaction();
-            session.save(user);
+            session.persist(user);
             transaction.commit();
         }
     }

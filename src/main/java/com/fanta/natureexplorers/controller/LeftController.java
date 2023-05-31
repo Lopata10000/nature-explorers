@@ -12,42 +12,28 @@ import javafx.fxml.Initializable;
  * The type Left controller.
  */
 public class LeftController implements Initializable {
-    /**
-     * The Back button.
-     */
-    @FXML JFXButton backButton;
-    /**
-     * The Users table button.
-     */
-    @FXML JFXButton usersTableButton;
-    /**
-     * The Transactions table button.
-     */
-    @FXML JFXButton transactionsTableButton;
-    /**
-     * The Costs table button.
-     */
-    @FXML JFXButton costsTableButton;
-    /**
-     * The Planing costs table button.
-     */
-    @FXML JFXButton planingCostsTableButton;
-    /**
-     * The Earning category table button.
-     */
-    @FXML JFXButton earningCategoryTableButton;
-    /**
-     * The Earning table button.
-     */
-    @FXML JFXButton earningTableButton;
-    /**
-     * The Cost category table button.
-     */
-    @FXML JFXButton costCategoryTableButton;
-    /**
-     * The Exchange rate table button.
-     */
-    @FXML JFXButton exchangeRateTableButton;
+
+    @FXML
+    JFXButton backButton;
+
+    @FXML
+    JFXButton usersTableButton;
+
+    @FXML
+    JFXButton managerTableButton;
+
+    @FXML
+    JFXButton excursionTableButton;
+
+    @FXML
+    JFXButton excursionParticipantsTableButton;
+
+    @FXML
+    JFXButton tripTableButton;
+
+    @FXML
+    JFXButton tripParticipantsTableButton;
+
     private MainController mainController; // Додано приватне поле mainController
 
     /**
@@ -62,7 +48,8 @@ public class LeftController implements Initializable {
     /**
      * Instantiates a new Left controller.
      */
-    public LeftController() {}
+    public LeftController() {
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -85,66 +72,32 @@ public class LeftController implements Initializable {
         this.mainController = mainController;
     }
 
-    /**
-     * Users table.
-     */
     public void usersTable() {
         mainController.userWindow();
     }
 
-    /**
-     * Budget table.
-     */
     public void managerTable() {
         mainController.managerWindow();
     }
 
-    /**
-     * Transactions table.
-     */
     public void reviewTable() {
         mainController.reviewWindow();
     }
 
-//    /**
-//     * Exchange rate table.
-//     */
-//    public void exchangeRateTable() {
-//        mainController.exchangeRateWindow();
-//    }
-//
-//    /**
-//     * Costs table.
-//     */
-//    public void costsTable() {
-//        mainController.costWindow();
-//    }
-//
-//    /**
-//     * Earning table.
-//     */
-//    public void earningTable() {
-//        mainController.earningWindow();
-//    }
-//
-//    /**
-//     * Planing costs table.
-//     */
-//    public void planingCostsTable() {
-//        mainController.planningCostWindow();
-//    }
-//
-//    /**
-//     * Cost category table.
-//     */
-//    public void costCategoryTable() {
-//        mainController.costCategoryWindow();
-//    }
-//
-//    /**
-//     * Earning category table.
-//     */
-//    public void earningCategoryTable() {
-//        mainController.earningCategoryWindow();
-//    }
+    public void excursionTable() {
+        mainController.excursionWindow();
+    }
+
+    public void excursionParticipantsTable() {
+        mainController.excursionParticipantsWindow();
+    }
+
+    public void tripTable() {
+        mainController.tripWindow();
+    }
+
+    public void tripParticipantsCostsTable() {
+        mainController.tripParticipantsWindow();
+    }
+
 }

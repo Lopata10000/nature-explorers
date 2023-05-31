@@ -1,3 +1,10 @@
+.rounded-stackpane {
+    -fx-background-radius: 0 0 20 0; /* Задаємо радіус завкруглення */
+    -fx-background-color: #333333; /* Колір фону StackPane */
+}
+.rounded-pane-left {
+-fx-background-radius: 0 20 20 0; /* Задаємо радіус завкруглення */
+}
 
 .jfx-button-fab {
     -fx-background-color: #4CAF50;
@@ -13,6 +20,7 @@
     -fx-min-width: 150px;
     -fx-pref-width: 150px;
 }
+
 .jfx-button-main {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;

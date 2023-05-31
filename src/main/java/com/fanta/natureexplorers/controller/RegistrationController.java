@@ -1,5 +1,6 @@
 package com.fanta.natureexplorers.controller;
 
+import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
@@ -15,7 +16,7 @@ import javafx.scene.control.TextField;
 /**
  * The type Registration controller.
  */
-public class RegistrationController implements Initializable {
+public class RegistrationController extends ErrorMessage implements Initializable {
     private MainController mainController;
 
     /**
@@ -45,17 +46,23 @@ public class RegistrationController implements Initializable {
      * Create user.
      */
     public void createUser() {
-        User user = new User( firstNameTextField.getText(),
-                lastNameTextField.getText(),
-                emailTextField.getText(),
-                passwordTextField.getText(),
-                UserRole.USER);
-        userService.save(user);
-        if (user != null) {
-            userService.successfulAuthorization();
-            mainController.dataBaseWindow();
+            User user = new User(
+                    firstNameTextField.getText(),
+                    lastNameTextField.getText(),
+                    emailTextField.getText(),
+                    passwordTextField.getText(),
+                    UserRole.MANAGER
+            );
+        try{
+            userService.save(user);
+            if (user != null) {
+                userService.successfulAuthorization();
+                mainController.dataBaseWindow();
+            }
+        }catch (Exception exception){
+            showErrorMessage("Користувач з такою електронною адресою існує");
         }
-    }
+        }
 
     /**
      * Sets main controller.

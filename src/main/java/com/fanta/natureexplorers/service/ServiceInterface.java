@@ -93,6 +93,7 @@ public interface ServiceInterface<T> {
                         .append(violation.getMessage())
                         .append("\n");
             }
+            showErrorMessage(errorMessage.toString());
             throw new RuntimeException();
         }
     }
@@ -102,8 +103,8 @@ public interface ServiceInterface<T> {
      *
      * @param message the message
      */
+    Alert alert = new Alert(Alert.AlertType.ERROR);
     default void showErrorMessage(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("Помилка валідації");
         alert.setHeaderText("Будь ласка, виправте наступні помилки:");
         alert.setContentText(message);

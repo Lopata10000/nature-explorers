@@ -9,11 +9,16 @@ import com.fanta.natureexplorers.controller.tablecontroller.TripParticipantContr
 import com.fanta.natureexplorers.controller.tablecontroller.UserController;
 import com.jfoenix.controls.JFXButton;
 
+import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
@@ -23,9 +28,10 @@ import javafx.scene.layout.Pane;
  */
 public class MainController {
     @FXML private BorderPane mainApp;
-    @FXML private Button registrationButton;
-    @FXML private Button authorizationButton;
-
+    @FXML private JFXButton registrationButton;
+    @FXML private JFXButton authorizationButton;
+    @FXML
+    private MediaView mediaView;
     /**
      * Instantiates a new Main controller.
      */
@@ -36,6 +42,12 @@ public class MainController {
      */
     @FXML
     public void initialize() {
+        URL resourceUrl = getClass().getResource("/com/fanta/nature-explorers/video/MainVideo.mp4");
+        Media media = new Media(resourceUrl.toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        mediaView.setMediaPlayer(mediaPlayer);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // To loop the video
+        mediaPlayer.play();
         authorizationButton.setOnAction(event -> authorizationWindow());
         registrationButton.setOnAction(event -> registrationWindow());
     }
@@ -84,16 +96,34 @@ public class MainController {
      */
     public void dataBaseWindow() {
         try {
-            FXMLLoader loader =
+            FXMLLoader left =
                     new FXMLLoader(
                             getClass()
                                     .getResource(
                                             "/fxml/LeftList.fxml"));
-            Pane dataBasePane = loader.load();
+            FXMLLoader top =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/TopLable.fxml"));
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/UserTable.fxml"));
+            AnchorPane userController = loader.load();
 
-            LeftController leftController = loader.getController();
+            UserController userController1 = loader.getController();
+            userController1.setMainController(this);
+
+            StackPane TopLable = top.load();
+
+            Pane dataBasePane = left.load();
+            LeftController leftController = left.getController();
             leftController.setMainController(this);
 
+            mainApp.setCenter(userController);
+            mainApp.setTop(TopLable);
             mainApp.setLeft(dataBasePane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -270,10 +300,10 @@ public class MainController {
         try {
             FXMLLoader loader =
                     new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
-            BorderPane mainBorderPane = loader.load();
+            StackPane mainStackPane = loader.load();
 
             // assuming mainApp is currently displayed
-            mainApp.getScene().setRoot(mainBorderPane);
+            mainApp.getScene().setRoot(mainStackPane);
 
         } catch (IOException e) {
             e.printStackTrace();

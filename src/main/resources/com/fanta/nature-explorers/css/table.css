@@ -1,6 +1,7 @@
 /* Фоновий колір для TableView */
 .table-view {
     -fx-background-color: #333333;
+    table-layout: auto;
 }
 
 /* Колір тексту для заголовків стовпців */

@@ -8,11 +8,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tablecontroller.ExcursionController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tablecontroller.ExcursionController">
     <children>
-        <Pane layoutX="50.0" layoutY="312.0" prefHeight="231.0" prefWidth="700.0" AnchorPane.bottomAnchor="56.80000000000001" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="312.0">
+        <StackPane AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0">
+            <children>
+                <TableView fx:id="excursionTable" maxHeight="258.0" maxWidth="-Infinity" onMouseClicked="#handleTableClick" prefHeight="258.0" style="-fx-background-color: #666666;" styleClass="root" stylesheets="@/com/fanta/nature-explorers/css/table.css" />
+            </children>
+        </StackPane>
+        <Pane layoutX="100.0" layoutY="310.0" prefHeight="231.0" prefWidth="700.0">
             <children>
                 <TextField fx:id="excursionName" layoutX="27.0" layoutY="13.0" prefWidth="275.0" promptText="Excursion name" styleClass="jfx-text-field-material">
                     <font>
@@ -49,8 +55,6 @@
 
             </children>
         </Pane>
-        <TableView fx:id="excursionTable" layoutY="29.0" onMouseClicked="#handleTableClick" prefHeight="258.0" prefWidth="800.0" style="-fx-background-color: #666666;" styleClass="root" stylesheets="@/com/fanta/nature-explorers/css/table.css" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="29.0" />
-        <AnchorPane layoutX="249.0" layoutY="268.0" />
         <TextField fx:id="findByIdField" layoutX="37.0" layoutY="-1.0" onKeyTyped="#searchExcursion" prefHeight="30.0" prefWidth="770.0" promptText="Find by id" styleClass="jfx-text-field-material" AnchorPane.leftAnchor="30.0" AnchorPane.rightAnchor="0.0">
             <font>
                 <Font name="MS Outlook" size="16.0" />

@@ -16,7 +16,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTextField?>
-<AnchorPane fx:id="authorizationPane" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #808080;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.AuthorizationController">
+<AnchorPane fx:id="authorizationPane" prefHeight="600.0" prefWidth="800.0"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.AuthorizationController">
     <stylesheets>
         <URL value="@/com/fanta/nature-explorers/css/styles.css" />
     </stylesheets>

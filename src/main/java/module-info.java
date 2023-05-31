@@ -8,6 +8,7 @@ module com.fanta.natureexplorers {
     requires java.validation;
     requires java.persistence;
     requires com.jfoenix;
+    requires javafx.media;
 
     exports com.fanta.natureexplorers.controller to javafx.fxml;
     exports com.fanta.natureexplorers;

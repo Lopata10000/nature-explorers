@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.Font?>
+<?import java.net.URL?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<StackPane  maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="70.0" prefWidth="700.0" styleClass="rounded-stackpane" style="-fx-background-color: rgb(77, 77, 77, 0.6);">
+   <children>
+      <Label alignment="CENTER" contentDisplay="CENTER" text="NATURE-EXPLORERS" textAlignment="CENTER" textFill="#ececec">
+         <font>
+            <Font name="Jokerman" size="40.0" />
+         </font>
+         <padding>
+            <Insets left="150.0" />
+         </padding>
+      </Label>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</StackPane>

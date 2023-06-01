@@ -20,7 +20,20 @@
     -fx-min-width: 150px;
     -fx-pref-width: 150px;
 }
-
+.jfx-button-tour {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 11px;
+    -fx-background-radius: 10px; /* Радіус закруглення фону */
+    -fx-border-radius: 20px;
+    -fx-border-radius: 50%;
+    -jfx-button-type: RAISED;
+    -fx-cursor: hand;
+    -fx-min-height: 35px;
+    -fx-pref-height: 35px;
+    -fx-min-width: 70px;
+    -fx-pref-width: 100px;
+}
 .jfx-button-main {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;
@@ -35,6 +48,13 @@
     -fx-min-width: 150px;
     -fx-pref-width: 150px;
 }
+.vbox {
+    -fx-background-color: lightgray;
+    -fx-background-radius: 20px;
+    -fx-padding: 10px;
+    -fx-spacing: 10px;
+}
+
 .jfx-text-field-material,
 .jfx-password-field-material {
     -fx-text-fill: #33333;

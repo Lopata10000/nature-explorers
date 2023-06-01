@@ -2,11 +2,6 @@ package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.validator.OnlyLetters;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
 import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,7 +10,6 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
@@ -55,13 +49,14 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private UserRole role;
-    private byte[] photo;
 
-    @Column( name = "registration_date",
+    @Column(
+            name = "registration_date",
             insertable = false,
             updatable = false,
             columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime registrationDate;
+
     public User(String firstName, String lastName, String email, String password, UserRole role) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -70,9 +65,7 @@ public class User {
         this.role = role;
     }
 
-    public User() {
-
-    }
+    public User() {}
 
     public int getUserId() {
         return userId;
@@ -122,14 +115,6 @@ public class User {
         this.role = role;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
@@ -137,5 +122,4 @@ public class User {
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
-
 }

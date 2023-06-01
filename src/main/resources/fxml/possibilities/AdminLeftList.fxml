@@ -20,11 +20,6 @@
                      <Font name="MS Outlook" size="16.0" />
                   </font>
                </JFXButton>
-                  <JFXButton styleClass="jfx-button-fab" fx:id="reviewTableButton"  onAction="#reviewTable" prefWidth="150.0" text="Reviews">
-                  <font>
-                     <Font name="MS Outlook" size="16.0" />
-                  </font>
-               </JFXButton>
                <JFXButton styleClass="jfx-button-fab" fx:id="mangerTableButton" onAction="#managerTable" prefWidth="150.0" text="Managers">
                   <font>
                      <Font name="MS Outlook" size="16.0" />

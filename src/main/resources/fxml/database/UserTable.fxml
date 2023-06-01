@@ -22,11 +22,6 @@
             <Font name="MS Outlook" size="16.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="30.0" fitWidth="30.0" layoutX="-1.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../com/fanta/nature-explorers/images/Back.png" />
-         </image>
-      </ImageView>
       <Pane layoutX="150.0" layoutY="310.0" prefHeight="231.0" prefWidth="600.0">
          <children>
             <TextField fx:id="firstNameField" prefWidth="275.0" promptText="First name" styleClass="jfx-text-field-material">

@@ -5,47 +5,35 @@ import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
-
+import java.io.FileOutputStream;
 import java.net.URL;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
-/**
- * The type Authorization controller.
- */
 public class AuthorizationController implements Initializable {
 
     private final UserService userService = new UserService();
+
     private MainController mainController;
     @FXML private TextField emailTextField;
     @FXML private TextField passwordTextField;
 
-    /**
-     * Instantiates a new Authorization controller.
-     *
-     * @param mainController the main controller
-     */
+
     public AuthorizationController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    /**
-     * Instantiates a new Authorization controller.
-     */
     public AuthorizationController() {}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
 
-    /**
-     * Authorization.
-     */
     @FXML
     public void authorization() {
         ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -56,39 +44,38 @@ public class AuthorizationController implements Initializable {
                     UserDao userDAO = new UserDao();
                     User user = userDAO.findUserByEmailAndPassword(email, password);
                     if (user != null) {
+                        Properties properties = new Properties();
+                        properties.setProperty("id", String.valueOf(user.getUserId()));
+                        String filePath = System.getProperty("user.dir") + "/file.properties";
+
+                        try (FileOutputStream output = new FileOutputStream(filePath)) {
+                            properties.store(output, null);
+                        } catch (Exception e) {
+                        }
                         Platform.runLater(
-                                () -> {if (user.getRole() == UserRole.USER) {
-                                    userService.successfulAuthorization();
-                                    mainController.excursionTourWindow();
-                                }
-                                else if(user.getRole() == UserRole.ADMIN) {
-                                    userService.successfulAuthorization();
-                                    mainController.dataBaseWindow();
-                                }
-                                else if (user.getRole() == UserRole.MANAGER) {
-                                    userService.successfulAuthorization();
-//                                    mainController.managerActionWindow();
-                                    mainController.excursionTourWindow();
-                                }
+                                () -> {
+                                    if (user.getRole() == UserRole.USER) {
+                                        userService.successfulAuthorization();
+                                        mainController.userActionWindow();
+                                    } else if (user.getRole() == UserRole.ADMIN) {
+                                        userService.successfulAuthorization();
+                                        mainController.dataBaseWindow();
+                                    } else if (user.getRole() == UserRole.MANAGER) {
+                                        userService.successfulAuthorization();
+                                        mainController.managerActionWindow();
+                                    }
                                 });
                     } else {
                         Platform.runLater(
-                                () -> {
-                                    userService.authorizationFailed();
-                                });
+                                () ->
+                                    userService.authorizationFailed()
+                                );
                     }
                 });
         executor.shutdown();
     }
 
-    /**
-     * Sets main controller.
-     *
-     * @param mainController the main controller
-     */
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
-
-
 }

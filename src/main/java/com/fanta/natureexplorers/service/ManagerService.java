@@ -2,8 +2,6 @@ package com.fanta.natureexplorers.service;
 
 import com.fanta.natureexplorers.dao.ManagerDao;
 import com.fanta.natureexplorers.entity.Manager;
-import com.fanta.natureexplorers.enumrole.ManagerStatus;
-
 import java.util.List;
 
 public class ManagerService implements ServiceInterface<Manager> {

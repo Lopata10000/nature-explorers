@@ -1,38 +1,27 @@
 package com.fanta.natureexplorers.controller.main;
 
 import com.jfoenix.controls.JFXButton;
-
 import java.net.URL;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 
-/**
- * The type Left controller.
- */
+/** The type Left controller. */
 public class LeftController implements Initializable {
 
-    @FXML
-    JFXButton backButton;
+    @FXML JFXButton backButton;
 
-    @FXML
-    JFXButton usersTableButton;
+    @FXML JFXButton usersTableButton;
 
-    @FXML
-    JFXButton managerTableButton;
+    @FXML JFXButton managerTableButton;
 
-    @FXML
-    JFXButton excursionTableButton;
+    @FXML JFXButton excursionTableButton;
 
-    @FXML
-    JFXButton excursionParticipantsTableButton;
+    @FXML JFXButton excursionParticipantsTableButton;
 
-    @FXML
-    JFXButton tripTableButton;
+    @FXML JFXButton tripTableButton;
 
-    @FXML
-    JFXButton tripParticipantsTableButton;
+    @FXML JFXButton tripParticipantsTableButton;
 
     private MainController mainController; // Додано приватне поле mainController
 
@@ -45,20 +34,15 @@ public class LeftController implements Initializable {
         this.mainController = mainController;
     }
 
-    /**
-     * Instantiates a new Left controller.
-     */
-    public LeftController() {
-    }
+    /** Instantiates a new Left controller. */
+    public LeftController() {}
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         backButton.setOnAction(event -> backToMainWindow());
     }
 
-    /**
-     * Back to main window.
-     */
+    /** Back to main window. */
     public void backToMainWindow() {
         mainController.mainWindow();
     }
@@ -80,10 +64,6 @@ public class LeftController implements Initializable {
         mainController.managerWindow();
     }
 
-    public void reviewTable() {
-        mainController.reviewWindow();
-    }
-
     public void excursionTable() {
         mainController.excursionWindow();
     }
@@ -99,5 +79,4 @@ public class LeftController implements Initializable {
     public void tripParticipantsCostsTable() {
         mainController.tripParticipantsWindow();
     }
-
 }

@@ -2,11 +2,6 @@ package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.enumrole.ManagerStatus;
 import com.fanta.natureexplorers.enumrole.UserRole;
-
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -18,12 +13,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 @Entity
 @Table(name = "managers")
-@TypeDefs({
-        @TypeDef(name = "pgsql_enum", typeClass = org.hibernate.type.EnumType.class)
-})
+@TypeDefs({@TypeDef(name = "pgsql_enum", typeClass = org.hibernate.type.EnumType.class)})
 public class Manager {
 
     @Id
@@ -36,8 +32,6 @@ public class Manager {
     @Type(type = "pgsql_enum")
     private ManagerStatus status = ManagerStatus.ACTIVE;
 
-    private byte[] photo;
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id", unique = true)
     private User user;
@@ -45,13 +39,13 @@ public class Manager {
     public Manager(User user) {
         this.user = user;
     }
+
     public Manager(User user, ManagerStatus status) {
         this.user = user;
         this.status = status;
     }
-    public Manager() {
 
-    }
+    public Manager() {}
 
     public int getManagerId() {
         return managerId;
@@ -61,22 +55,13 @@ public class Manager {
         this.managerId = managerId;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public User getUser() {
         return user;
     }
+
     public int getUserId() {
         return user.getUserId();
     }
-
-
 
     public void setUser(User user) {
         this.user = user;
@@ -89,12 +74,14 @@ public class Manager {
     public void setStatus(ManagerStatus status) {
         this.status = status;
     }
+
     @PrePersist
     private void setDefaultRole() {
         if (status == null || !isValidUserRole(status.name())) {
             status = ManagerStatus.ACTIVE;
         }
     }
+
     private boolean isValidUserRole(String value) {
         try {
             UserRole.valueOf(value);

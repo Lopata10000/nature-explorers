@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
-<AnchorPane fx:id="excursionPane" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tours.ExcursionToursController">
+<AnchorPane fx:id="excursionPane" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tours.TripToursController">
     <stylesheets>
         <URL value="@/com/fanta/nature-explorers/css/styles.css" />
     </stylesheets>

@@ -22,6 +22,5 @@
         <mapping class="com.fanta.natureexplorers.entity.Manager"/>
         <mapping class="com.fanta.natureexplorers.entity.ExcursionParticipant"/>
         <mapping class="com.fanta.natureexplorers.entity.TripParticipant"/>
-        <mapping class="com.fanta.natureexplorers.entity.Review"/>
     </session-factory>
 </hibernate-configuration>

@@ -1,5 +1,6 @@
 package com.fanta.natureexplorers.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -7,7 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,23 +16,25 @@ public class TripParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "trip_participants_id")
     private int tripParticipants_id;
+
     @NotNull(message = "User cannot be null")
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "user_id")
     private User user;
+
     @NotNull(message = "Trip cannot be null")
     @ManyToOne
     @JoinColumn(name = "trip_id", referencedColumnName = "trip_id")
     private Trip trip;
+
     public TripParticipant(User user, Trip trip) {
         this.user = user;
         this.trip = trip;
     }
 
-    public TripParticipant() {
-
-    }
+    public TripParticipant() {}
 
     public int getTripParticipantsId() {
         return tripParticipants_id;

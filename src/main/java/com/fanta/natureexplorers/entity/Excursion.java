@@ -1,7 +1,6 @@
 package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.validator.OnlyLetters;
-
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -22,6 +21,7 @@ public class Excursion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "excursion_id")
     private int excursionId;
+
     @OnlyLetters
     @NotNull(message = "Name cannot be null")
     @Size(max = 255, message = "Name must not exceed 255 characters")
@@ -35,23 +35,20 @@ public class Excursion {
     @Size(max = 255, message = "Location must not exceed 255 characters")
     private String location;
 
-    private byte[] photo;
-
-    public Excursion(String name, String description, LocalDate date, String location, Manager manager) {
+    public Excursion(
+            String name, String description, LocalDate date, String location, Manager manager) {
         this.name = name;
         this.description = description;
         this.date = date;
         this.location = location;
-        this.manager =manager;
+        this.manager = manager;
     }
 
     @ManyToOne
     @JoinColumn(name = "manager_id", referencedColumnName = "manager_id")
     private Manager manager;
 
-    public Excursion() {
-
-    }
+    public Excursion() {}
 
     public int getExcursionId() {
         return excursionId;
@@ -85,14 +82,6 @@ public class Excursion {
         this.date = date;
     }
 
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
-    }
-
     public Manager getManager() {
         return manager;
     }
@@ -108,5 +97,4 @@ public class Excursion {
     public void setLocation(String location) {
         this.location = location;
     }
-
 }

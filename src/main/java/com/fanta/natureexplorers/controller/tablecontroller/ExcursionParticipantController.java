@@ -7,9 +7,6 @@ import com.fanta.natureexplorers.dao.ExcursionDao;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.ExcursionParticipant;
 import com.fanta.natureexplorers.service.ExcursionParticipantService;
-
-import org.hibernate.exception.ConstraintViolationException;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -17,7 +14,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -26,20 +22,16 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
+import org.hibernate.exception.ConstraintViolationException;
 
-/**
- * The type Earning category controller.
- */
 public class ExcursionParticipantController implements Initializable {
     @FXML private TableView<ExcursionParticipant> excursionParticipantTable;
     @FXML private TextField userId;
     @FXML private TextField excursionId;
     @FXML private TextField findByIdField;
-    private final ExcursionParticipantService excursionParticipantService = new ExcursionParticipantService();
+    private final ExcursionParticipantService excursionParticipantService =
+            new ExcursionParticipantService();
 
-    /**
-     * Create excursion participant.
-     */
     @FXML
     public void createExcursionParticipant() {
         try {
@@ -47,7 +39,9 @@ public class ExcursionParticipantController implements Initializable {
             Integer excursionID = Integer.valueOf(excursionId.getText());
             UserDao userDao = new UserDao();
             ExcursionDao excursionDao = new ExcursionDao();
-            ExcursionParticipant excursionParticipant = new ExcursionParticipant (userDao.getById(userID), excursionDao.getById(excursionID));
+            ExcursionParticipant excursionParticipant =
+                    new ExcursionParticipant(
+                            userDao.getById(userID), excursionDao.getById(excursionID));
             excursionParticipantService.save(excursionParticipant);
             refreshTable();
         } catch (ConstraintViolationException e) {
@@ -57,33 +51,30 @@ public class ExcursionParticipantController implements Initializable {
         }
     }
 
-    /**
-     * Update excursion participant.
-     */
     @FXML
     public void updateExcursionParticipant() {
-            try {
-                ExcursionParticipant selectedExcursionParticipant =
-                        excursionParticipantTable.getSelectionModel().getSelectedItem();
-                Integer excursionParticipantId = Integer.parseInt(String.valueOf(selectedExcursionParticipant.getId()));
+        try {
+            ExcursionParticipant selectedExcursionParticipant =
+                    excursionParticipantTable.getSelectionModel().getSelectedItem();
+            Integer excursionParticipantId =
+                    Integer.parseInt(String.valueOf(selectedExcursionParticipant.getId()));
 
-                Integer userID = Integer.valueOf(userId.getText());
-                Integer excursionID = Integer.valueOf(excursionId.getText());
-                UserDao userDao = new UserDao();
-                ExcursionDao excursionDao = new ExcursionDao();
-                ExcursionParticipant excursionParticipant = new ExcursionParticipant (userDao.getById(userID), excursionDao.getById(excursionID));
-                excursionParticipantService.update(excursionParticipantId,excursionParticipant);
-                refreshTable();
-            } catch (ConstraintViolationException e) {
-                showAlert("З таким іменем уже існує");
-            } catch (Exception e) {
-                showAlert("Не правильний формат");
-            }
+            Integer userID = Integer.valueOf(userId.getText());
+            Integer excursionID = Integer.valueOf(excursionId.getText());
+            UserDao userDao = new UserDao();
+            ExcursionDao excursionDao = new ExcursionDao();
+            ExcursionParticipant excursionParticipant =
+                    new ExcursionParticipant(
+                            userDao.getById(userID), excursionDao.getById(excursionID));
+            excursionParticipantService.update(excursionParticipantId, excursionParticipant);
+            refreshTable();
+        } catch (ConstraintViolationException e) {
+            showAlert("З таким іменем уже існує");
+        } catch (Exception e) {
+            showAlert("Не правильний формат");
         }
+    }
 
-    /**
-     * Delete excursion participant.
-     */
     @FXML
     public void deleteExcursionParticipant() {
         ExcursionParticipant selectedExcursionParticipant =
@@ -98,16 +89,14 @@ public class ExcursionParticipantController implements Initializable {
         }
     }
 
-    /**
-     * Search excursion participant.
-     */
     @FXML
     void searchExcursionParticipant() {
         try {
             excursionParticipantTable.getItems().clear();
             String excursionParticipantIdText = findByIdField.getText();
             Integer excursionParticipantId = Integer.parseInt(excursionParticipantIdText);
-            ExcursionParticipant excursionParticipants = excursionParticipantService.getById(excursionParticipantId);
+            ExcursionParticipant excursionParticipants =
+                    excursionParticipantService.getById(excursionParticipantId);
             excursionParticipantTable.getItems().add(excursionParticipants);
             if (excursionParticipants == null) {
                 showAlert("Нічого не знайдено");
@@ -150,8 +139,7 @@ public class ExcursionParticipantController implements Initializable {
                     excursionParticipantTable.getSelectionModel().getSelectedItem();
 
             if (selectedExcursionParticipant != null) {
-                userId.setText(
-                        String.valueOf(selectedExcursionParticipant.getUser().getUserId()));
+                userId.setText(String.valueOf(selectedExcursionParticipant.getUser().getUserId()));
                 excursionId.setText(
                         String.valueOf(selectedExcursionParticipant.getUser().getUserId()));
             }
@@ -194,22 +182,9 @@ public class ExcursionParticipantController implements Initializable {
         return variableName.toString();
     }
 
-    /**
-     * Instantiates a new Earning category controller.
-     */
     public ExcursionParticipantController() {}
 
-    /**
-     * Instantiates a new Earning category controller.
-     *
-     * @param mainController the main controller
-     */
     public ExcursionParticipantController(MainController mainController) {}
 
-    /**
-     * Sets main controller.
-     *
-     * @param mainController the main controller
-     */
     public void setMainController(MainController mainController) {}
 }

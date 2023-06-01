@@ -1,7 +1,6 @@
 package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.validator.OnlyLetters;
-
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -29,10 +28,15 @@ public class Trip {
     private String name;
 
     @NotNull(message = "Description cannot be null")
-    @Size(max = 255, min = 10, message = "Description must not exceed 255 characters, and not min 10")
+    @Size(
+            max = 255,
+            min = 10,
+            message = "Description must not exceed 255 characters, and not min 10")
     private String description;
+
     @Column(name = "start_date")
     private LocalDate startDate;
+
     @Column(name = "end_date")
     private LocalDate endDate;
 
@@ -40,14 +44,18 @@ public class Trip {
     @Size(max = 255, message = "Location must not exceed 255 characters")
     private String location;
 
-    private byte[] photo;
-
     @ManyToOne
     @NotNull(message = "Manager need to be")
     @JoinColumn(name = "manager_id", referencedColumnName = "manager_id")
     private Manager manager;
 
-    public Trip(String name, String description, LocalDate startDate, LocalDate endDate, String location, Manager manager) {
+    public Trip(
+            String name,
+            String description,
+            LocalDate startDate,
+            LocalDate endDate,
+            String location,
+            Manager manager) {
         this.name = name;
         this.description = description;
         this.startDate = startDate;
@@ -56,10 +64,7 @@ public class Trip {
         this.manager = manager;
     }
 
-    public Trip() {
-
-    }
-
+    public Trip() {}
 
     public int getTripId() {
         return tripId;
@@ -107,14 +112,6 @@ public class Trip {
 
     public void setLocation(String location) {
         this.location = location;
-    }
-
-    public byte[] getPhoto() {
-        return photo;
-    }
-
-    public void setPhoto(byte[] photo) {
-        this.photo = photo;
     }
 
     public Manager getManager() {

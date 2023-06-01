@@ -4,9 +4,7 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import javax.sql.DataSource;
 
-/** The type Pool config. */
 public class PoolConfig implements DataBaseConfig {
-    /** The constant dataSource. */
     public static final HikariDataSource dataSource;
 
     static {
@@ -21,11 +19,7 @@ public class PoolConfig implements DataBaseConfig {
         dataSource = new HikariDataSource(pullConfiguration);
     }
 
-    /**
-     * Close data source.
-     *
-     * @param dataSource the data source
-     */
+
     public void closeDataSource(DataSource dataSource) {
         if (dataSource instanceof HikariDataSource) {
             ((HikariDataSource) dataSource).close();

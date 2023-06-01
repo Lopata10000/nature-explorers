@@ -2,13 +2,12 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.validator.ErrorMessage;
 import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
-
+import com.fanta.natureexplorers.validator.ErrorMessage;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -16,7 +15,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -26,9 +24,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-/**
- * The type User controller.
- */
 public class UserController extends ErrorMessage implements Initializable {
     @FXML private TableView<User> userTable;
     @FXML private TextField firstNameField;
@@ -40,67 +35,54 @@ public class UserController extends ErrorMessage implements Initializable {
 
     private final UserService userService = new UserService();
 
-    /**
-     * Create user.
-     */
     @FXML
     public void createUser() {
         try {
             try {
-                User user = new User(
-                        firstNameField.getText(),
-                        lastNameField.getText(),
-                        emailField.getText(),
-                        passwordField.getText(),
-                        UserRole.valueOf(userStatusField.getText())
-                );
+                User user =
+                        new User(
+                                firstNameField.getText(),
+                                lastNameField.getText(),
+                                emailField.getText(),
+                                passwordField.getText(),
+                                UserRole.valueOf(userStatusField.getText()));
                 UserDao userDao = new UserDao();
                 userDao.findByEmail(emailField.getText());
                 if (userDao.findByEmail(emailField.getText()) == true) {
                     showAlert("Користувач з такою електронною адресою існує");
-                } else
-                    userService.save(user);
+                } else userService.save(user);
                 refreshTable();
 
             } catch (IllegalArgumentException exception) {
                 showAlert("Не валідний статус(USER; ADMIN; MANAGER)");
             }
-        }
-        catch (RuntimeException exception)
-        {
+        } catch (RuntimeException exception) {
             showAlert("Корстувач з такою електронною адресою існує");
         }
     }
 
-
-
-    /**
-     * Update user.
-     */
     @FXML
     public void updateUser() {
-            try {
-                User selectedUser = userTable.getSelectionModel().getSelectedItem();
-                Integer userId = Integer.parseInt(String.valueOf(selectedUser.getUserId()));
-                User user = new User(firstNameField.getText(),
-                        lastNameField.getText(),
-                        emailField.getText(),
-                        passwordField.getText(),
-                        UserRole.valueOf(userStatusField.getText()));
-                UserDao userDao = new UserDao();
-                if (userDao.findByEmail(emailField.getText()) != true) {
-                    userService.update(userId, user);
-                    refreshTable();
-                } else
-                    showAlert("Корстувач з такою електронною адресою існує");
-            } catch (RuntimeException exception) {
-                showAlert("Корстувач з такою електронною адресою існує");
-            }
+        try {
+            User selectedUser = userTable.getSelectionModel().getSelectedItem();
+            Integer userId = Integer.parseInt(String.valueOf(selectedUser.getUserId()));
+            User user =
+                    new User(
+                            firstNameField.getText(),
+                            lastNameField.getText(),
+                            emailField.getText(),
+                            passwordField.getText(),
+                            UserRole.valueOf(userStatusField.getText()));
+            UserDao userDao = new UserDao();
+            if (userDao.findByEmail(emailField.getText()) != true) {
+                userService.update(userId, user);
+                refreshTable();
+            } else showAlert("Корстувач з такою електронною адресою існує");
+        } catch (RuntimeException exception) {
+            showAlert("Корстувач з такою електронною адресою існує");
+        }
     }
 
-    /**
-     * Delete user.
-     */
     @FXML
     public void deleteUser() {
         User selectedUser = userTable.getSelectionModel().getSelectedItem();
@@ -113,21 +95,18 @@ public class UserController extends ErrorMessage implements Initializable {
         }
     }
 
-    /**
-     * Search user.
-     */
     @FXML
     void searchUser() {
-            userTable.getItems().clear();
-            // Додати користувачів до таблиці
-            String userIdText = findByIdField.getText();
-            Integer userId = Integer.parseInt(userIdText);
-            User users = userService.getById(userId);
+        userTable.getItems().clear();
+        // Додати користувачів до таблиці
+        String userIdText = findByIdField.getText();
+        Integer userId = Integer.parseInt(userIdText);
+        User users = userService.getById(userId);
         if (users == null) {
             showAlert("Такого користувача не знайдено");
             refreshTable();
         }
-            userTable.getItems().add(users);
+        userTable.getItems().add(users);
     }
 
     private void showAlert(String message) {
@@ -204,22 +183,10 @@ public class UserController extends ErrorMessage implements Initializable {
         return variableName.toString();
     }
 
-    /**
-     * Instantiates a new User controller.
-     */
     public UserController() {}
 
-    /**
-     * Instantiates a new User controller.
-     *
-     * @param mainController the main controller
-     */
     public UserController(MainController mainController) {}
 
-    /**
-     * Sets main controller.
-     *
-     * @param mainController the main controller
-     */
+
     public void setMainController(MainController mainController) {}
 }

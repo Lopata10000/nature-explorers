@@ -1,29 +1,22 @@
 package com.fanta.natureexplorers.controller.tours;
 
-import com.fanta.natureexplorers.controller.authentication.AuthorizationController;
 import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.ExcursionDao;
 import com.fanta.natureexplorers.entity.Excursion;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.TilePane;
+import javafx.scene.layout.HBox;
 
 public class ExcursionToursController implements Initializable {
-    @FXML
-    private TilePane tilePane;
+    @FXML private HBox boxInfo;
     private MainController mainController;
     private ExcursionDao excursionDao = new ExcursionDao();
-
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -34,13 +27,14 @@ public class ExcursionToursController implements Initializable {
         for (Excursion excursion : excursions) {
             try {
                 Node excursionNode = createExcursionNode(excursion);
-                tilePane.getChildren().add(excursionNode);
+                boxInfo.getChildren().add(excursionNode);
             } catch (IOException e) {
                 // обробити помилку
                 e.printStackTrace();
             }
         }
     }
+
     private Node createExcursionNode(Excursion excursion) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/tours/Excursion.fxml"));
         Node node = loader.load();
@@ -51,16 +45,13 @@ public class ExcursionToursController implements Initializable {
         return node;
     }
 
-
     public void setMainController(MainController mainController) {
         this.mainController = mainController;
     }
+
     public ExcursionToursController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    /**
-     * Instantiates a new Authorization controller.
-     */
     public ExcursionToursController() {}
 }

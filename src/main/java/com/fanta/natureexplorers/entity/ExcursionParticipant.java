@@ -1,5 +1,6 @@
 package com.fanta.natureexplorers.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -15,6 +16,7 @@ public class ExcursionParticipant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "excursion_participants_id")
     private int id;
 
     @ManyToOne
@@ -32,9 +34,7 @@ public class ExcursionParticipant {
         this.excursion = excursion;
     }
 
-    public ExcursionParticipant() {
-
-    }
+    public ExcursionParticipant() {}
 
     public int getId() {
         return id;

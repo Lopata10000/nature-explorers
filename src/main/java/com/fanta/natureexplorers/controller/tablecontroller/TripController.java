@@ -2,13 +2,12 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.validator.ErrorMessage;
 import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.ManagerDao;
 import com.fanta.natureexplorers.entity.Manager;
 import com.fanta.natureexplorers.entity.Trip;
 import com.fanta.natureexplorers.service.TripService;
-
+import com.fanta.natureexplorers.validator.ErrorMessage;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -17,7 +16,6 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -28,9 +26,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-/**
- * The type Trip controller.
- */
 public class TripController extends ErrorMessage implements Initializable {
     @FXML private TableView<Trip> tripTable;
     @FXML private TextField managerId;
@@ -42,59 +37,50 @@ public class TripController extends ErrorMessage implements Initializable {
     @FXML private TextField findByIdField;
     private final TripService tripService = new TripService();
 
-    /**
-     * Create trip.
-     */
     @FXML
     public void createTrip() {
-            Integer managerID = Integer.valueOf(managerId.getText());
-            ManagerDao managerDao = new ManagerDao();
-            Manager manager = managerDao.getById(managerID);
-            if (manager == null) {
-                showAlert("Користувача з таким id не існує");
-                alert.showAndWait();
-            }
-            else {
-                String tripName = nameTrip.getText();
-                String tripDescription = descriptionTrip.getText();
-                LocalDate dateStart = startDate.getValue();
-                LocalDate endStart = endDate.getValue();
-                String tripLocation = locationTrip.getText();
-                Trip trip = new Trip(tripName, tripDescription, dateStart, endStart, tripLocation, manager);
-                tripService.save(trip);
-                refreshTable();
-            }
+        Integer managerID = Integer.valueOf(managerId.getText());
+        ManagerDao managerDao = new ManagerDao();
+        Manager manager = managerDao.getById(managerID);
+        if (manager == null) {
+            showAlert("Користувача з таким id не існує");
+            alert.showAndWait();
+        } else {
+            String tripName = nameTrip.getText();
+            String tripDescription = descriptionTrip.getText();
+            LocalDate dateStart = startDate.getValue();
+            LocalDate endStart = endDate.getValue();
+            String tripLocation = locationTrip.getText();
+            Trip trip =
+                    new Trip(tripName, tripDescription, dateStart, endStart, tripLocation, manager);
+            tripService.save(trip);
+            refreshTable();
+        }
     }
 
-    /**
-     * Update trip.
-     */
     @FXML
     public void updateTrip() {
-            Trip selectedTrip = tripTable.getSelectionModel().getSelectedItem();
-            Integer tripID = Integer.parseInt(String.valueOf(selectedTrip.getTripId()));
-            Integer managerID = Integer.parseInt(managerId.getText());
-            ManagerDao managerDao = new ManagerDao();
-            Manager manager = managerDao.getById(managerID);
-            if (manager == null) {
-                showAlert("Користувача з таким id не існує");
-                alert.showAndWait();
-            }
-            else {
-                String tripName = nameTrip.getText();
-                String tripDescription = descriptionTrip.getText();
-                LocalDate dateStart = startDate.getValue();
-                LocalDate endStart = endDate.getValue();
-                String tripLocation = locationTrip.getText();
-                Trip trip = new Trip(tripName, tripDescription, dateStart, endStart, tripLocation, manager);
-                tripService.update(tripID, trip);
-                refreshTable();
-            }
+        Trip selectedTrip = tripTable.getSelectionModel().getSelectedItem();
+        Integer tripID = Integer.parseInt(String.valueOf(selectedTrip.getTripId()));
+        Integer managerID = Integer.parseInt(managerId.getText());
+        ManagerDao managerDao = new ManagerDao();
+        Manager manager = managerDao.getById(managerID);
+        if (manager == null) {
+            showAlert("Користувача з таким id не існує");
+            alert.showAndWait();
+        } else {
+            String tripName = nameTrip.getText();
+            String tripDescription = descriptionTrip.getText();
+            LocalDate dateStart = startDate.getValue();
+            LocalDate endStart = endDate.getValue();
+            String tripLocation = locationTrip.getText();
+            Trip trip =
+                    new Trip(tripName, tripDescription, dateStart, endStart, tripLocation, manager);
+            tripService.update(tripID, trip);
+            refreshTable();
+        }
     }
 
-    /**
-     * Delete trip.
-     */
     @FXML
     public void deleteTrip() {
         Trip selectedTrip = tripTable.getSelectionModel().getSelectedItem();
@@ -107,20 +93,17 @@ public class TripController extends ErrorMessage implements Initializable {
         }
     }
 
-    /**
-     * Search trip.
-     */
     @FXML
     void searchTrip() {
-            tripTable.getItems().clear();
-            String tripIdText = findByIdField.getText();
-            Integer tripId = Integer.parseInt(tripIdText);
-            Trip trips = tripService.getById(tripId);
-            tripTable.getItems().add(trips);
-            if (trips == null) {
-                showAlert("Такого походу не знайдено");
-                refreshTable();
-            }
+        tripTable.getItems().clear();
+        String tripIdText = findByIdField.getText();
+        Integer tripId = Integer.parseInt(tripIdText);
+        Trip trips = tripService.getById(tripId);
+        tripTable.getItems().add(trips);
+        if (trips == null) {
+            showAlert("Такого походу не знайдено");
+            refreshTable();
+        }
     }
 
     private void showAlert(String message) {
@@ -199,22 +182,9 @@ public class TripController extends ErrorMessage implements Initializable {
         return variableName.toString();
     }
 
-    /**
-     * Instantiates a new Trip controller.
-     */
     public TripController() {}
 
-    /**
-     * Instantiates a new Trip controller.
-     *
-     * @param mainController the main controller
-     */
     public TripController(MainController mainController) {}
 
-    /**
-     * Sets main controller.
-     *
-     * @param mainController the main controller
-     */
     public void setMainController(MainController mainController) {}
 }

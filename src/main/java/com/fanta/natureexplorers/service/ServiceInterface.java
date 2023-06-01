@@ -104,6 +104,7 @@ public interface ServiceInterface<T> {
      * @param message the message
      */
     Alert alert = new Alert(Alert.AlertType.ERROR);
+
     default void showErrorMessage(String message) {
         alert.setTitle("Помилка валідації");
         alert.setHeaderText("Будь ласка, виправте наступні помилки:");

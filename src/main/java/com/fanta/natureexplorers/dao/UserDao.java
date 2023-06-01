@@ -1,18 +1,19 @@
 package com.fanta.natureexplorers.dao;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
+
 import com.fanta.natureexplorers.entity.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import javax.persistence.NoResultException;
+import javax.persistence.TypedQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
-import javax.persistence.NoResultException;
-import javax.persistence.TypedQuery;
 
 public class UserDao {
 
@@ -27,7 +28,8 @@ public class UserDao {
 
     public User findUserByEmailAndPassword(String email, String password) {
         try (Session session = sessionFactory.openSession()) {
-            String queryString = "SELECT u FROM User u WHERE u.email = :email AND u.password = :password";
+            String queryString =
+                    "SELECT u FROM User u WHERE u.email = :email AND u.password = :password";
             TypedQuery<User> query = session.createQuery(queryString, User.class);
             query.setParameter("email", email);
             query.setParameter("password", password);

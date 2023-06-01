@@ -1,12 +1,11 @@
 package com.fanta.natureexplorers.controller.tours;
 
 import com.fanta.natureexplorers.controller.main.MainController;
-import com.fanta.natureexplorers.dao.ExcursionDao;
-import com.fanta.natureexplorers.dao.ExcursionParticipantDao;
+import com.fanta.natureexplorers.dao.TripDao;
+import com.fanta.natureexplorers.dao.TripParticipantDao;
 import com.fanta.natureexplorers.dao.UserDao;
-import com.fanta.natureexplorers.entity.Excursion;
-import com.fanta.natureexplorers.entity.ExcursionParticipant;
-import com.fanta.natureexplorers.validator.ErrorMessage;
+import com.fanta.natureexplorers.entity.Trip;
+import com.fanta.natureexplorers.entity.TripParticipant;
 import java.io.FileInputStream;
 import java.util.Properties;
 import javafx.fxml.FXML;
@@ -14,24 +13,24 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
-public class ExcursionNodeController extends ErrorMessage {
+public class TripNodeController {
     private MainController mainController;
     @FXML private Button registrateInTure;
     @FXML private Label nameLabel;
-
-    @FXML private Label dateLabel;
+    @FXML private Label startDate;
+    @FXML private Label endDate;
 
     @FXML private Label descriptionLabel;
 
     @FXML private Label locationLabel;
 
-    public void setData(Excursion excursion) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        registrateInTure.setUserData(String.valueOf(excursion.getExcursionId()));
-        nameLabel.setText("Name: " + excursion.getName());
-        dateLabel.setText("Date: " + excursion.getDate().toString());
-        descriptionLabel.setText("Description: " + excursion.getDescription());
-        locationLabel.setText("Location: " + excursion.getLocation());
+    public void setData(Trip trip) {
+        registrateInTure.setUserData(String.valueOf(trip.getTripId()));
+        nameLabel.setText("Name: " + trip.getName());
+        startDate.setText("Date: " + trip.getStartDate().toString());
+        startDate.setText("Date: " + trip.getEndDate().toString());
+        descriptionLabel.setText("Description: " + trip.getDescription());
+        locationLabel.setText("Location: " + trip.getLocation());
     }
 
     public void registrationInTour() {
@@ -43,16 +42,15 @@ public class ExcursionNodeController extends ErrorMessage {
             properties.load(input);
         } catch (Exception e) {
         }
-
-        ExcursionDao excursionDao = new ExcursionDao();
+        TripDao tripDao = new TripDao();
         UserDao userDao = new UserDao();
-        ExcursionParticipantDao excursionParticipantDao = new ExcursionParticipantDao();
-        ExcursionParticipant excursionParticipant =
-                new ExcursionParticipant(
+        TripParticipantDao tripParticipantDao = new TripParticipantDao();
+        TripParticipant tripParticipant =
+                new TripParticipant(
                         userDao.getById(Integer.valueOf(properties.getProperty("id"))),
-                        excursionDao.getById(
+                        tripDao.getById(
                                 Integer.valueOf(String.valueOf(registrateInTure.getUserData()))));
-        excursionParticipantDao.save(excursionParticipant);
+        tripParticipantDao.save(tripParticipant);
         Alert info = new Alert(Alert.AlertType.INFORMATION);
         info.setContentText("Успішно");
         info.setTitle("Вас зареєстровано");
@@ -60,7 +58,7 @@ public class ExcursionNodeController extends ErrorMessage {
     }
 
     private void showAlert(String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Інформація");
         alert.setHeaderText(null);
         alert.setContentText(message);
@@ -70,9 +68,9 @@ public class ExcursionNodeController extends ErrorMessage {
         this.mainController = mainController;
     }
 
-    public ExcursionNodeController(MainController mainController) {
+    public TripNodeController(MainController mainController) {
         this.mainController = mainController;
     }
 
-    public ExcursionNodeController() {}
+    public TripNodeController() {}
 }

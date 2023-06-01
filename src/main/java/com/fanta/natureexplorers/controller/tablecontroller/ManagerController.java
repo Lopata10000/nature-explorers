@@ -2,14 +2,13 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.validator.ErrorMessage;
 import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.Manager;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.ManagerStatus;
-import com.fanta.natureexplorers.service.ManagerService;;
-
+import com.fanta.natureexplorers.service.ManagerService;
+import com.fanta.natureexplorers.validator.ErrorMessage;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -17,7 +16,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -27,22 +25,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 
-/**
- * The type Manager controller.
- */
-public class ManagerController extends ErrorMessage implements Initializable
-{
+public class ManagerController extends ErrorMessage implements Initializable {
     @FXML private TableView<Manager> managerTable;
     @FXML private TextField managerStatus;
     @FXML private TextField userId;
     @FXML private TextField findByIdField;
 
-
     private final ManagerService managerService = new ManagerService();
 
-    /**
-     * Create manager.
-     */
     @FXML
     public void createManager() {
         try {
@@ -52,27 +42,20 @@ public class ManagerController extends ErrorMessage implements Initializable
             User user = userDAO.getById(userID);
             if (user == null) {
                 showAlert("Користувача з таким id не існує");
-            }
-            else {
+            } else {
                 Manager manager = new Manager(user, ManagerStatus.valueOf(managerStatus.getText()));
                 managerService.save(manager);
                 refreshTable();
             }
-        }
-              catch (IllegalArgumentException exception)
-        {
+        } catch (IllegalArgumentException exception) {
             showAlert("Не валідний статус (ACTIVE; PASSIVE)");
         }
     }
 
-    /**
-     * Update manager.
-     */
     @FXML
     public void updateManager() {
         try {
-            Manager selectedManager =
-                    managerTable.getSelectionModel().getSelectedItem();
+            Manager selectedManager = managerTable.getSelectionModel().getSelectedItem();
             Integer userID = Integer.valueOf(userId.getText());
             UserDao userDAO = new UserDao();
             User user = userDAO.getById(userID);
@@ -83,22 +66,16 @@ public class ManagerController extends ErrorMessage implements Initializable
                 managerService.update(Integer.valueOf(userId.getText()), manager);
                 refreshTable();
             }
+        } catch (IllegalArgumentException exception) {
+            showAlert("Не валідний статус (ACTIVE; PASSIVE)");
         }
-         catch (IllegalArgumentException exception)
-            {
-                showAlert("Не валідний статус (ACTIVE; PASSIVE)");
-            }
     }
 
-    /**
-     * Delete manager.
-     */
     @FXML
     public void deleteManager() {
         Manager selectedManager = managerTable.getSelectionModel().getSelectedItem();
         try {
-            Integer managerId =
-                    Integer.parseInt(String.valueOf(selectedManager.getManagerId()));
+            Integer managerId = Integer.parseInt(String.valueOf(selectedManager.getManagerId()));
             managerService.delete(managerId);
             refreshTable();
         } catch (NumberFormatException e) {
@@ -106,19 +83,16 @@ public class ManagerController extends ErrorMessage implements Initializable
         }
     }
 
-    /**
-     * Search manager.
-     */
     @FXML
     void searchManager() {
-            managerTable.getItems().clear();
-            String managerIdText = findByIdField.getText();
-            Integer managerId = Integer.parseInt(managerIdText);
-            Manager managers = managerService.getById(managerId);
+        managerTable.getItems().clear();
+        String managerIdText = findByIdField.getText();
+        Integer managerId = Integer.parseInt(managerIdText);
+        Manager managers = managerService.getById(managerId);
         if (managers == null) {
             showAlert("Такого керівника не знайдено");
             refreshTable();
-        }else {
+        } else {
             managerTable.getItems().add(managers);
         }
     }
@@ -150,13 +124,11 @@ public class ManagerController extends ErrorMessage implements Initializable
     @FXML
     private void handleTableClick(MouseEvent event) {
         if (event.getClickCount() == 1) {
-            Manager selectedManager =
-                    managerTable.getSelectionModel().getSelectedItem();
+            Manager selectedManager = managerTable.getSelectionModel().getSelectedItem();
 
             if (selectedManager != null) {
                 userId.setText(String.valueOf(selectedManager.getUser().getUserId()));
-                managerStatus.setText(
-                        String.valueOf(selectedManager.getStatus()));
+                managerStatus.setText(String.valueOf(selectedManager.getStatus()));
             }
         }
     }
@@ -197,23 +169,11 @@ public class ManagerController extends ErrorMessage implements Initializable
         return variableName.toString();
     }
 
-    /**
-     * Instantiates a new Manager controller.
-     */
     public ManagerController() {}
 
-    /**
-     * Instantiates a new Manager controller.
-     *
-     * @param mainController the main controller
-     */
     public ManagerController(MainController mainController) {}
 
-    /**
-     * Sets main controller.
-     *
-     * @param mainController the main controller
-     */
     public void setMainController(MainController mainController) {}
+
     Alert alert = new Alert(Alert.AlertType.ERROR);
 }

@@ -1,5 +1,7 @@
 package com.fanta.natureexplorers.entity;
 
+import com.fanta.natureexplorers.validator.OnlyLetters;
+
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -20,7 +22,7 @@ public class Excursion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "excursion_id")
     private int excursionId;
-
+    @OnlyLetters
     @NotNull(message = "Name cannot be null")
     @Size(max = 255, message = "Name must not exceed 255 characters")
     private String name;

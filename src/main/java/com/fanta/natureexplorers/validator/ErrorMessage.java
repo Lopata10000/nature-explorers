@@ -1,4 +1,4 @@
-package com.fanta.natureexplorers.controller;
+package com.fanta.natureexplorers.validator;
 
 import javafx.scene.control.Alert;
 

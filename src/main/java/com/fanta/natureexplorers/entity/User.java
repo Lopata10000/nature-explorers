@@ -1,6 +1,7 @@
 package com.fanta.natureexplorers.entity;
 
 import com.fanta.natureexplorers.enumrole.UserRole;
+import com.fanta.natureexplorers.validator.OnlyLetters;
 
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
@@ -29,11 +30,13 @@ public class User {
     @Column(name = "user_id")
     private int userId;
 
+    @OnlyLetters
     @NotNull(message = "First name cannot be null")
     @Size(max = 255, min = 1, message = "First name must not exceed 255 characters")
     @Column(name = "first_name")
     private String firstName;
 
+    @OnlyLetters
     @NotNull(message = "Last name cannot be null")
     @Size(max = 255, min = 1, message = "Last name must not exceed 255 characters")
     @Column(name = "last_name")

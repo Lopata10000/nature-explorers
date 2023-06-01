@@ -15,7 +15,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.scene.media.MediaView?>
-<StackPane  prefHeight="620.0"  prefWidth="1100.0"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.MainController">
+<StackPane  prefHeight="620.0"  prefWidth="1100.0"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.main.MainController">
    <MediaView fx:id="mediaView" fitWidth="${mainApp.width}" fitHeight="${mainApp.height}"/>
    <BorderPane fx:id="mainApp" prefHeight="620.0"  prefWidth="1100.0" style="-fx-background-color: rgb(77, 77, 77, 0.5);" >
    <stylesheets>

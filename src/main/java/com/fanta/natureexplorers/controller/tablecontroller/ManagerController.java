@@ -2,13 +2,12 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.controller.ErrorMessage;
-import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.validator.ErrorMessage;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.Manager;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.ManagerStatus;
-import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.ManagerService;;
 
 import java.net.URL;

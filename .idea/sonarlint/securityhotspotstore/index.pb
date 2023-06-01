@@ -1,10 +1,6 @@
 
-m
-=src/main/java/com/fanta/natureexplorers/entity/Excursion.java,6\2\62903abb59f8f676bdbde1829437e1ced62ca03f
 p
 @src/main/java/com/fanta/natureexplorers/service/TripService.java,d\9\d9e68cf551742dbdc82d879418a84ff5f2a0033d
-
-Osrc/main/java/com/fanta/natureexplorers/controller/AuthorizationController.java,7\4\74dec5b38e2f28c89a92a529ab7912eed9202cfa
 r
 Bsrc/main/java/com/fanta/natureexplorers/service/ReviewService.java,2\2\22b84bfd47fa36679e5f1b12283387ad34dece65
 u
@@ -21,12 +17,6 @@ x
 Hsrc/main/java/com/fanta/natureexplorers/validator/OrFutureValidator.java,8\f\8f4a1c9e2fd15cb440ee26edf716f25f4ed357b8
 s
 Csrc/main/java/com/fanta/natureexplorers/validator/OrFutureDate.java,d\b\db86010a908da326a9be48d85610c820c8d36bc7
-{
-Ksrc/main/java/com/fanta/natureexplorers/validator/OnlyLettersValidator.java,3\9\390ebaff65b84e579389a21167992143e39121e2
-r
-Bsrc/main/java/com/fanta/natureexplorers/validator/OnlyLetters.java,8\a\8a16f2d96823aa40e0ac1802aa61658eccd865b4
-h
-8src/main/java/com/fanta/natureexplorers/entity/Trip.java,1\b\1b93163e3377915b0889d1a93e46c5da78385240
 s
 Csrc/main/java/com/fanta/natureexplorers/dao/TripParticipantDao.java,f\2\f288fec34bf5f1fb23a2576f59f4c29984e96138
 s

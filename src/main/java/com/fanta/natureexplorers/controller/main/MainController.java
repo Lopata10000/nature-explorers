@@ -1,5 +1,7 @@
-package com.fanta.natureexplorers.controller;
+package com.fanta.natureexplorers.controller.main;
 
+import com.fanta.natureexplorers.controller.authentication.AuthorizationController;
+import com.fanta.natureexplorers.controller.authentication.RegistrationController;
 import com.fanta.natureexplorers.controller.tablecontroller.ExcursionController;
 import com.fanta.natureexplorers.controller.tablecontroller.ExcursionParticipantController;
 import com.fanta.natureexplorers.controller.tablecontroller.ReviewController;
@@ -7,6 +9,8 @@ import com.fanta.natureexplorers.controller.tablecontroller.ManagerController;
 import com.fanta.natureexplorers.controller.tablecontroller.TripController;
 import com.fanta.natureexplorers.controller.tablecontroller.TripParticipantController;
 import com.fanta.natureexplorers.controller.tablecontroller.UserController;
+import com.fanta.natureexplorers.controller.tours.ExcursionNodeController;
+import com.fanta.natureexplorers.controller.tours.ExcursionToursController;
 import com.jfoenix.controls.JFXButton;
 
 import javafx.scene.layout.StackPane;
@@ -32,6 +36,7 @@ public class MainController {
     @FXML private JFXButton authorizationButton;
     @FXML
     private MediaView mediaView;
+
     /**
      * Instantiates a new Main controller.
      */
@@ -60,7 +65,7 @@ public class MainController {
             FXMLLoader loader =
                     new FXMLLoader(
                             getClass()
-                                    .getResource("/fxml/Authorization.fxml"));
+                                    .getResource("/fxml/authentication/Authorization.fxml"));
             AnchorPane authorizationPane = loader.load();
 
             AuthorizationController authorizationController = loader.getController();
@@ -79,7 +84,7 @@ public class MainController {
         try {
             FXMLLoader loader =
                     new FXMLLoader(
-                            getClass().getResource("/fxml/Registration.fxml"));
+                            getClass().getResource("/fxml/authentication/Registration.fxml"));
             AnchorPane registrationPane = loader.load();
 
             RegistrationController registrationController = loader.getController();
@@ -100,12 +105,12 @@ public class MainController {
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/fxml/LeftList.fxml"));
+                                            "/fxml/possibilities/AdminLeftList.fxml"));
             FXMLLoader top =
                     new FXMLLoader(
                             getClass()
                                     .getResource(
-                                            "/fxml/TopLable.fxml"));
+                                            "/fxml/Main/TopLable.fxml"));
             FXMLLoader loader =
                     new FXMLLoader(
                             getClass()
@@ -125,6 +130,102 @@ public class MainController {
             mainApp.setCenter(userController);
             mainApp.setTop(TopLable);
             mainApp.setLeft(dataBasePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void managerActionWindow() {
+        try {
+            FXMLLoader left =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/possibilities/ManagerLeftList.fxml"));
+            FXMLLoader top =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/Main/TopLable.fxml"));
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/TripTable.fxml"));
+            AnchorPane managerController = loader.load();
+
+            ManagerController managerController1 = loader.getController();
+            managerController1.setMainController(this);
+
+            StackPane TopLable = top.load();
+
+            Pane dataBasePane = left.load();
+            LeftController leftController = left.getController();
+            leftController.setMainController(this);
+
+            mainApp.setCenter(managerController);
+            mainApp.setTop(TopLable);
+            mainApp.setLeft(dataBasePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void userActionWindow() {
+        try {
+            FXMLLoader left =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/possibilities/UserLeftList.fxml"));
+            FXMLLoader top =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/Main/TopLable.fxml"));
+            FXMLLoader loader =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/database/ReviewTable.fxml"));
+            AnchorPane userController = loader.load();
+
+            UserController userController1 = loader.getController();
+            userController1.setMainController(this);
+
+            StackPane TopLable = top.load();
+
+            Pane dataBasePane = left.load();
+            LeftController leftController = left.getController();
+            leftController.setMainController(this);
+
+            mainApp.setCenter(userController);
+            mainApp.setTop(TopLable);
+            mainApp.setLeft(dataBasePane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    public void excursionTourWindow() {
+        try {
+            FXMLLoader center =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/tours/ExcursionMain.fxml"));
+            FXMLLoader top =
+                    new FXMLLoader(
+                            getClass()
+                                    .getResource(
+                                            "/fxml/Main/TopLable.fxml"));
+
+            StackPane TopLable = top.load();
+
+            AnchorPane excursionNodeController = center.load();
+
+            ExcursionToursController excursionNodeController1 = center.getController();
+            excursionNodeController1.setMainController(this);
+
+            mainApp.setCenter(excursionNodeController);
+            mainApp.setTop(TopLable);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -284,7 +385,7 @@ public class MainController {
     public void resetLeftPane() {
         try {
             FXMLLoader leftLoader =
-                    new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+                    new FXMLLoader(getClass().getResource("/fxml/Main/Main.fxml"));
             Pane leftPane = leftLoader.load();
 
             mainApp.setLeft(leftPane);
@@ -299,7 +400,7 @@ public class MainController {
     public void mainWindow() {
         try {
             FXMLLoader loader =
-                    new FXMLLoader(getClass().getResource("/fxml/Main.fxml"));
+                    new FXMLLoader(getClass().getResource("/fxml/Main/Main.fxml"));
             StackPane mainStackPane = loader.load();
 
             // assuming mainApp is currently displayed

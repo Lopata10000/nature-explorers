@@ -1,6 +1,7 @@
-package com.fanta.natureexplorers.controller;
+package com.fanta.natureexplorers.controller.authentication;
 
-import com.fanta.natureexplorers.dao.UserDao;
+import com.fanta.natureexplorers.validator.ErrorMessage;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
@@ -10,7 +11,6 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
 
 /**
@@ -51,16 +51,24 @@ public class RegistrationController extends ErrorMessage implements Initializabl
                     lastNameTextField.getText(),
                     emailTextField.getText(),
                     passwordTextField.getText(),
-                    UserRole.MANAGER
+                    UserRole.ADMIN
             );
         try{
             userService.save(user);
-            if (user != null) {
-                userService.successfulAuthorization();
-                mainController.dataBaseWindow();
-            }
         }catch (Exception exception){
             showErrorMessage("Користувач з такою електронною адресою існує");
+        }
+        if (user != null && user.getRole() == UserRole.USER) {
+            userService.successfulAuthorization();
+            mainController.userActionWindow();
+        }
+        else if(user != null && user.getRole() == UserRole.ADMIN) {
+            userService.successfulAuthorization();
+            mainController.dataBaseWindow();
+        }
+        else if (user != null && user.getRole() == UserRole.MANAGER) {
+            userService.successfulAuthorization();
+            mainController.excursionTourWindow();
         }
         }
 

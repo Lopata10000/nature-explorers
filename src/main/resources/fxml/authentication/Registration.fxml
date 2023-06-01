@@ -12,7 +12,7 @@
 <?import com.jfoenix.controls.JFXTextField?>
 <?import com.jfoenix.controls.JFXPasswordField?>
 
-<AnchorPane fx:id="registrationPane" prefHeight="600.0" prefWidth="800.0"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.RegistrationController">
+<AnchorPane fx:id="registrationPane" prefHeight="600.0" prefWidth="800.0"  xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.authentication.RegistrationController">
     <stylesheets>
         <URL value="@/com/fanta/nature-explorers/css/styles.css" />
     </stylesheets>

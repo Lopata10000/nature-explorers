@@ -2,24 +2,18 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.ManagerDao;
-import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.Excursion;
 import com.fanta.natureexplorers.entity.Manager;
-import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.service.ExcursionService;
-import com.fanta.natureexplorers.entity.Excursion;
 
-import java.math.BigDecimal;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.ZoneOffset;
 import java.util.List;
 import java.util.ResourceBundle;
 

@@ -1,5 +1,7 @@
 package com.fanta.natureexplorers.entity;
 
+import com.fanta.natureexplorers.validator.OnlyLetters;
+
 import java.time.LocalDate;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,6 +23,7 @@ public class Trip {
     @Column(name = "trip_id")
     private int tripId;
 
+    @OnlyLetters
     @NotNull(message = "Name cannot be null")
     @Size(max = 255, message = "Name must not exceed 255 characters")
     private String name;

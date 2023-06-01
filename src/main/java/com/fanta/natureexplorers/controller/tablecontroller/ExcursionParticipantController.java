@@ -2,11 +2,10 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.ExcursionDao;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.ExcursionParticipant;
-import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.service.ExcursionParticipantService;
 
 import org.hibernate.exception.ConstraintViolationException;

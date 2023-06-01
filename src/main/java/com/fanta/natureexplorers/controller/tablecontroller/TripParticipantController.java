@@ -2,15 +2,12 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.controller.ErrorMessage;
-import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.validator.ErrorMessage;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.TripDao;
 import com.fanta.natureexplorers.dao.UserDao;
-import com.fanta.natureexplorers.entity.Trip;
 import com.fanta.natureexplorers.entity.TripParticipant;
 import com.fanta.natureexplorers.service.TripParticipantService;
-
-import org.hibernate.exception.ConstraintViolationException;
 
 import java.net.URL;
 import java.sql.Connection;

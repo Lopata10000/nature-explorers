@@ -11,6 +11,7 @@ import org.hibernate.cfg.Configuration;
 public class ExcursionDao{
     private Session session;
 
+
     public ExcursionDao() {
         session = new Configuration().configure().buildSessionFactory().openSession();
     }

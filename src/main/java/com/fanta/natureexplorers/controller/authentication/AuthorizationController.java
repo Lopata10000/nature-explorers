@@ -1,7 +1,9 @@
-package com.fanta.natureexplorers.controller;
+package com.fanta.natureexplorers.controller.authentication;
 
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
+import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
 
 import java.net.URL;
@@ -55,9 +57,19 @@ public class AuthorizationController implements Initializable {
                     User user = userDAO.findUserByEmailAndPassword(email, password);
                     if (user != null) {
                         Platform.runLater(
-                                () -> {
+                                () -> {if (user.getRole() == UserRole.USER) {
+                                    userService.successfulAuthorization();
+                                    mainController.excursionTourWindow();
+                                }
+                                else if(user.getRole() == UserRole.ADMIN) {
                                     userService.successfulAuthorization();
                                     mainController.dataBaseWindow();
+                                }
+                                else if (user.getRole() == UserRole.MANAGER) {
+                                    userService.successfulAuthorization();
+//                                    mainController.managerActionWindow();
+                                    mainController.excursionTourWindow();
+                                }
                                 });
                     } else {
                         Platform.runLater(

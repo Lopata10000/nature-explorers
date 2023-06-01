@@ -7,7 +7,7 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import java.net.URL?>
-<Pane id="leftController" fx:controller="com.fanta.natureexplorers.controller.LeftController" styleClass="rounded-pane-left" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: rgb(77, 77, 77, 0.5);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+<Pane id="leftController" fx:controller="com.fanta.natureexplorers.controller.main.LeftController" styleClass="rounded-pane-left" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: rgb(77, 77, 77, 0.5);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <stylesheets>
       <URL value="@/com/fanta/nature-explorers/css/styles.css" />
    </stylesheets>

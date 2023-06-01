@@ -10,16 +10,23 @@ module com.fanta.natureexplorers {
     requires com.jfoenix;
     requires javafx.media;
 
-    exports com.fanta.natureexplorers.controller to javafx.fxml;
+    exports com.fanta.natureexplorers.controller.main to javafx.fxml;
+    exports com.fanta.natureexplorers.controller.authentication to javafx.fxml;
+    exports com.fanta.natureexplorers.controller.tours to javafx.fxml;
     exports com.fanta.natureexplorers;
     exports com.fanta.natureexplorers.enumrole;
     exports com.fanta.natureexplorers.controller.tablecontroller to javafx.fxml;
+    exports com.fanta.natureexplorers.validator;
+
 
     opens com.fanta.natureexplorers.controller.tablecontroller to javafx.fxml;
     opens com.fanta.natureexplorers to
             javafx.fxml;
     opens db.migration;
-    opens com.fanta.natureexplorers.controller to javafx.fxml;
     opens com.fanta.natureexplorers.entity;
     opens com.fanta.natureexplorers.enumrole to javafx.fxml;
+    opens com.fanta.natureexplorers.controller.authentication to javafx.fxml;
+    opens com.fanta.natureexplorers.controller.tours to javafx.fxml;
+    opens com.fanta.natureexplorers.validator to javafx.fxml;
+    opens com.fanta.natureexplorers.controller.main to javafx.fxml;
 }

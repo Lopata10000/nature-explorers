@@ -2,11 +2,9 @@ package com.fanta.natureexplorers.controller.tablecontroller;
 
 import static com.fanta.natureexplorers.database.PoolConfig.dataSource;
 
-import com.fanta.natureexplorers.controller.MainController;
+import com.fanta.natureexplorers.controller.main.MainController;
 import com.fanta.natureexplorers.dao.UserDao;
-import com.fanta.natureexplorers.entity.Excursion;
 import com.fanta.natureexplorers.entity.Review;
-import com.fanta.natureexplorers.entity.Trip;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.service.ReviewService;
 

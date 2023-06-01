@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import java.net.URL?>
+<Pane id="leftController" fx:controller="com.fanta.natureexplorers.controller.main.LeftController" styleClass="rounded-pane-left" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: rgb(77, 77, 77, 0.5);" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
+   <stylesheets>
+      <URL value="@/com/fanta/nature-explorers/css/styles.css" />
+   </stylesheets>
+   <children>
+      <HBox layoutX="20" layoutY="45">
+         <children>
+            <VBox spacing="10.0">
+               <JFXButton styleClass="jfx-button-fab" fx:id="excursionTableButton"  onAction="#excursionTable" prefWidth="150.0" text="Excursion">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab" fx:id="excursionParticipantsTableButton" onAction="#excursionParticipantsTable"  prefWidth="150.0" text="Excursion Participants">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab" fx:id="tripTableButton"  onAction="#tripTable" prefWidth="150.0" text="Trip">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab"  fx:id="tripParticipantsTableButton"  onAction="#tripParticipantsCostsTable" prefWidth="150.0" text="Trip Participants">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+               <JFXButton styleClass="jfx-button-fab" fx:id="backButton" onAction="#backToMainWindow" prefWidth="150.0" text="Back to Menu">
+                  <font>
+                     <Font name="MS Outlook" size="16.0" />
+                  </font>
+               </JFXButton>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</Pane>

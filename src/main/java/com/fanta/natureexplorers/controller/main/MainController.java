@@ -14,6 +14,8 @@ import com.fanta.natureexplorers.controller.tours.UserLeftListController;
 import com.jfoenix.controls.JFXButton;
 import java.io.IOException;
 import java.net.URL;
+
+import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.AnchorPane;
@@ -23,14 +25,20 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
+import javafx.stage.Stage;
 
-public class MainController {
+public class MainController extends Application {
     @FXML private BorderPane mainApp;
     @FXML private JFXButton registrationButton;
     @FXML private JFXButton authorizationButton;
     @FXML private MediaView mediaView;
 
     public MainController() {}
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+
+    }
 
     /** Initialize. */
     @FXML
@@ -41,8 +49,27 @@ public class MainController {
         mediaView.setMediaPlayer(mediaPlayer);
         mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // To loop the video
         mediaPlayer.play();
-        authorizationButton.setOnAction(event -> authorizationWindow());
-        registrationButton.setOnAction(event -> registrationWindow());
+    }
+
+    public void mainWindow() {
+        try {
+            StackPane mainStackPane = new StackPane();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main/Main.fxml"));
+            Pane mainPane = loader.load();
+            URL resourceUrl = getClass().getResource("/com/fanta/nature-explorers/video/MainVideo.mp4");
+            Media media = new Media(resourceUrl.toString());
+            MediaPlayer mediaPlayer = new MediaPlayer(media);
+            MediaView mediaView = new MediaView(mediaPlayer);
+            mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE); // To loop the video
+            mediaPlayer.play();
+
+            mainStackPane.getChildren().add(mediaView); // Adding mediaView to StackPane
+            mainStackPane.getChildren().add(mainPane); // Adding your layout on top of the video
+
+            mainApp.getScene().setRoot(mainStackPane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /** Authorization window. */
@@ -297,20 +324,6 @@ public class MainController {
             Pane leftPane = leftLoader.load();
 
             mainApp.setLeft(leftPane);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    /** Main window. */
-    public void mainWindow() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Main/Main.fxml"));
-            StackPane mainStackPane = loader.load();
-
-            // assuming mainApp is currently displayed
-            mainApp.getScene().setRoot(mainStackPane);
-
         } catch (IOException e) {
             e.printStackTrace();
         }

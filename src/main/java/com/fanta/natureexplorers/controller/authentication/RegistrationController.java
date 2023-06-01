@@ -1,6 +1,7 @@
 package com.fanta.natureexplorers.controller.authentication;
 
 import com.fanta.natureexplorers.controller.main.MainController;
+import com.fanta.natureexplorers.dao.UserDao;
 import com.fanta.natureexplorers.entity.User;
 import com.fanta.natureexplorers.enumrole.UserRole;
 import com.fanta.natureexplorers.service.UserService;
@@ -25,6 +26,7 @@ public class RegistrationController extends ErrorMessage implements Initializabl
     @FXML private TextField emailTextField;
     @FXML private TextField passwordTextField;
     private final UserService userService = new UserService();
+    private final UserDao userDao = new UserDao();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {}
@@ -38,21 +40,23 @@ public class RegistrationController extends ErrorMessage implements Initializabl
                         emailTextField.getText(),
                         passwordTextField.getText(),
                         UserRole.USER);
-        try {
-            userService.save(user);
-        } catch (Exception exception) {
-            showErrorMessage("Користувач з такою електронною адресою існує");
-        }
-        if (user != null && user.getRole() == UserRole.USER) {
-            userService.successfulAuthorization();
-            mainController.userActionWindow();
-        } else if (user != null && user.getRole() == UserRole.ADMIN) {
-            userService.successfulAuthorization();
-            mainController.dataBaseWindow();
-        } else if (user != null && user.getRole() == UserRole.MANAGER) {
-            userService.successfulAuthorization();
-            mainController.managerActionWindow();
-        }
+            if (userDao.findByEmail(user.getEmail()) != true) {
+                userService.save(user);
+                if (user.getRole() == UserRole.USER) {
+                    userService.successfulAuthorization();
+                    mainController.userActionWindow();
+                }
+                if (user.getRole() == UserRole.ADMIN) {
+                    userService.successfulAuthorization();
+                    mainController.dataBaseWindow();
+                }
+                if (user.getRole() == UserRole.MANAGER) {
+                    userService.successfulAuthorization();
+                    mainController.managerActionWindow();
+                }
+            }
+            else
+                showErrorMessage("Користувач з такою електронною адресою існує");
     }
 
     /**

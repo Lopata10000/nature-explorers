@@ -20,6 +20,7 @@
     -fx-min-width: 150px;
     -fx-pref-width: 150px;
 }
+
 .jfx-button-tour {
     -fx-background-color: #4CAF50;
     -fx-text-fill: white;

@@ -4,15 +4,16 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 
+<?import javafx.scene.layout.FlowPane?>
 <AnchorPane fx:id="excursionPane" prefHeight="620.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.fanta.natureexplorers.controller.tours.ExcursionToursController">
     <stylesheets>
         <URL value="@/com/fanta/nature-explorers/css/styles.css" />
     </stylesheets>
       <children>
-         <HBox fx:id="boxInfo" spacing="20">
+          <FlowPane fx:id="boxInfo" hgap="20" vgap="20" prefWidth="800" prefHeight="400" maxWidth="850" maxHeight="400" orientation="HORIZONTAL">
             <children>
 
             </children>
-         </HBox>
+         </FlowPane>
       </children>
 </AnchorPane>

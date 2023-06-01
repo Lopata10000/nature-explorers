@@ -11,10 +11,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 
 public class ExcursionToursController implements Initializable {
-    @FXML private HBox boxInfo;
+    @FXML private FlowPane boxInfo;
     private MainController mainController;
     private ExcursionDao excursionDao = new ExcursionDao();
 
